@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTEC syndicate</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <link rel="icon" href="/static/images/logo.svg">
+</head>
+<body>
+    <div class="loader">
+            <img src="/static/images/logo.svg" class="loader-img" alt="">
+            <div id="loader-spin"></div>
+    </div>
+  {{if eq .loggedin false}}
+    <div class="nmlogin">
+        <div>
+            <img src="/static/images/bg.jpg" class="login-bg" alt="">
+        </div>
+        <div class="in-railways-login">
+            <img src="/static/images/logo.svg" id="login-logo-nm" alt="">
+            <div style="display: inline-block; vertical-align: middle;">
+                <p id="in-railways-txt">Indian <br>Railways</p>
+            </div>
+        </div>
+        <div class="nmlogin-cidiv">
+            <p id="nmlogin-ci">Connecting<br>India</p>
+            <div class="nmlogin-btns">
+                    <button id="goto-login" class="nmlogin-btn animate__animated animate__fadeInUp animate__delay-1s goto-login">Login</button>
+                    <button id="goto-signup" class="nmlogin-btn animate__animated animate__fadeInUp animate__delay-1s goto-signup" style="margin-left: 2em;">Sign Up</button>
+            </div>
+        </div>
+    </div>
+    <div class="signup">
+        <div class="ls">
+            <div class="ls-main">
+                <div class="ls-message">
+                    <img src="/static/images/icons/back-arrow.svg" class="goto-nm" alt="">
+
+                    <img src="/static/images/logo.svg" class="ls-logo" alt="">
+                    <p id="ls-message">Onboarding</p>
+                </div>
+                <center>
+
+                    <div class="ls-form">
+                        <form action="" id="signup-form" method="post" enctype="multipart/form-data">
+                            <input type="text" id="signup-fname" class="ls-input tio" placeholder="First Name">
+                            <input type="text" id="signup-lname" class="ls-input tio" placeholder="Last Name">
+                            <br>
+                            <input type="text" class="ls-input" oninput="checkEmailValidity()" id="signup-email" placeholder="Email address">
+                            <p class="error-systems">Invalid Email address</p>
+                            <br>
+                            <input type="date" min="1920-01-01" id="datepicker" class="ls-input tio" placeholder="DOB">
+                            <input type="number" pattern="[+91]-[0-9]{3}-[0-9]{4}-[0-9]{3}" id="signup-phone" class="ls-input tio" placeholder="Phone Number">
+                            <br>
+                            <input type="password" id="signup-password" class="ls-input tio" placeholder="Password">
+                            <input type="password" id="check-password" class="ls-input tio" onkeydown="changeSignupWidth()" oninput="checkPasswordValidity()" placeholder="Confirm Password">
+                            <p class="error-systems2">Passwords do not match</p>
+                            <br>
+                            <br>
+                            <center>
+                                
+                                <input accept="image/*" type="file" id="aadharupload" hidden>
+                                <label for="aadharupload" id="aubtn"><img src="/static/images/icons/upload.svg" id="ls-upload" alt="">
+                                    <p id="uac">Upload aadhar card<span style="color: red;">*</span></p></label>
+                                    <br>
+                                    <p id="agree">By continuing, you agree to our <b>User Agreement</b> and <b>Privacy Policy</b>.</p>
+                                </center>
+                            </div>
+                        </div>
+                </center>
+            <div class="ls-scn">
+                <div class="ls-img">
+                    <img src="/static/images/ls.svg" class="ls-imgg" alt="">
+                </div>
+                <button type="submit" class="ls-submit-btn">
+                    <img src="/static/images/icons/next.svg" class="ls-next-btn" alt="">
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="login">
+        <video src="/static/images/login.mp4" autoplay muted loop id="login-bgg">your browser dosent support HTML5 video</video>
+        <div class="ls" >
+            <div class="ls-main" style="width: 30em;
+    background-color: rgba(0, 0, 0, 0.24);
+   backdrop-filter: blur(4px);
+">
+                <div class="ls-message">
+                    <img src="/static/images/icons/back-arrow.svg" class="goto-nm" alt="">
+                    <img src="/static/images/logo.svg" class="ls-logo" alt="">
+                    <p id="ls-message">Welcome back.</p>
+                </div>
+                <center>
+
+                    <div class="ls-form" id="systum">
+                        <form id="login-form" action="" method="post" enctype="multipart/form-data">
+                            <input id="login-email" type="text" class="ls-input" placeholder="Email address or Phone number">
+                            <input id="login-password" type="password" class="ls-input" placeholder="Password">
+                            <p style="color: white; font-size: .8em; font-family: '300';">Dont have an account? <span class="goto-signup" style="font-family: '400'; cursor: pointer;">Sign Up</span></p>
+                            <br>
+                            <br>
+                        </div>
+                        <button type="submit"id="systumm">
+                            <img src="/static/images/icons/next.svg"  class="ls-next-btn" alt="">
+                        </button>
+                </center>
+                </form>
+        </div>
+    </div>
+</div>
+{{else if eq .loggedin true}}
+<div class="dashboard">
+    <div class="dashboard-gradient"></div>
+    <div class="booking-gradient"></div>
+    <div class="dashboard-nav">
+        <div class="nav-section1">
+            <img class="section1-logo" src="/static/images/logo.svg">
+            <div class="section1-nav">
+                <div class="section1-nav-links">
+                    <div class="section1-nav-link navlink-active goto-home">
+                        <p class="section1-navlink-p">Home</p>
+                    </div>
+                    <div class="section1-nav-link goto-checkin">
+                        <p class="section1-navlink-p">Checkin</p>
+                    </div>
+                    <div class="section1-nav-link goto-book">
+                        <p class="section1-navlink-p">Bookings</p>
+                    </div>
+                    <div class="section1-nav-link goto-music">
+                        <p class="section1-navlink-p">Music</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="nav-section2">
+            <div class="section2-1">
+                <div class="section2-search">
+                    <form action="">
+                    <button class="search-btn">
+                        <img src="/static/images/icons/search.svg" class="search-btn-icon" alt="">
+                    </button>
+                        <input type="text" class="search-btn-nav" placeholder="Type something...">
+                    </form>
+                </div>
+                <div class="section2-notif-btn">
+                    <img src="/static/images/icons/notification.svg" class="section2-notif-btn-icon" alt="">
+                </div>
+            </div>
+            <div class="section2-2">
+                <div class="section2-time">
+                    <p class="section2-time-p">12:00</p>
+                    <div id="s2d">
+                        <p class="section2-time-d">HCET Syndicate <br> Dashboard</p>
+                    </div>
+                </div >
+                <div class="section2-profile-btn">
+                    <img src="https://app.planetscale.com/api/avatar?name={{.name}}" width="50" height="50" class="dashboard-profile-pfp-bg" alt="">
+                    <img src="/static/images/icons/letters/{{.l2}}.svg" class="dashboard-nav-pfp-fg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-main">
+        <div class="dashboard-section1">
+            <div class="dashboard-profile">
+                <div class="ds1">
+                    <div class="dashboard-profile-pfp">
+                        <div>
+                            <img src="https://app.planetscale.com/api/avatar?name={{.name}}" width="57" height="57" class="dashboard-profile-pfp-bg" alt="">
+                            <img src="/static/images/icons/letters/{{.l2}}.svg" class="dashboard-profile-pfp-fg" alt="">
+                        </div>
+                    </div>
+                    <div class="dashboard-profile-name">
+                        <p class="dashboard-profile-nayme">{{.name}}</p>
+                        {{if .location}}
+                        <p class="dashboard-profile-location">Sri nagar, kashmir</p>
+                        {{else}}
+                        <p class="dashboard-profile-location">add location</p>
+                        {{end}}
+                    </div>
+                    <div class="dashboard-profile-stats">
+                        <div class="dashboard-profile-stat">
+                            <div class="dp-stat">
+                                <img src="/static/images/icons/balance.svg" class="dp-stat-img" alt="">
+                                <div class="dp-stat-details">
+                                    <p class="dp-stat-details-title">balance</p>
+                                    <p class="dpst-details">2000</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-profile-stat" style="margin-right: 0;">
+                            <div class="dp-stat">
+                                <img src="/static/images/icons/travel.svg" class="dp-stat-img" alt="">
+                                <div class="dp-stat-details">
+                                    <p class="dp-stat-details-title">travel points</p>
+                                    <p class="dpst-details">120</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-reccomendeds">
+                <p class="dashboard-title">Reccomended</p>
+                <div class="dashboard-reccomended">
+                    <img src="/static/images/places/kashmir.svg" class="dr-img" alt="">
+                    <div class="dr-s1">
+                        <div class="drs1-1">
+                            <p class="dr-from">Delhi to</p>
+                            <p class="dr-to">Kashmir (POK)</p>
+                        </div>
+                        <div class="drs1-2">
+                            <div class="drsrr">
+                                <p class="srs12-t">rank</p>
+                                <p class="dr-rank">#3</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dr-details">
+                        <div class="drd-1">
+                            <img src="/static/images/icons/paisa.svg" class="drd-img" alt="">
+                            <p class="drd-txt">Rs 1300</p>
+                        </div>
+                        <div class="drd-2">
+                            <img src="/static/images/icons/time.svg" class="drd-img" alt="">
+                            <p class="drd-txt">12hrs</p>
+                        </div>
+                    </div>
+                    <div class="dr-more">
+                        <img src="/static/images/icons/more.svg" class="drm-img" alt="">
+                    </div>
+
+                </div>
+                <div class="dashboard-reccomended">
+                    <img src="/static/images/places/kashmir.svg" class="dr-img" alt="">
+                    <div class="dr-s1">
+                        <div class="drs1-1">
+                            <p class="dr-from">Delhi to</p>
+                            <p class="dr-to">Kashmir (POK)</p>
+                        </div>
+                        <div class="drs1-2">
+                            <div class="drsrr">
+                                <p class="srs12-t">rank</p>
+                                <p class="dr-rank">#3</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dr-details">
+                        <div class="drd-1">
+                            <img src="/static/images/icons/paisa.svg" class="drd-img" alt="">
+                            <p class="drd-txt">Rs 1300</p>
+                        </div>
+                        <div class="drd-2">
+                            <img src="/static/images/icons/time.svg" class="drd-img" alt="">
+                            <p class="drd-txt">12hrs</p>
+                        </div>
+                    </div>
+                    <div class="dr-more">
+                        <img src="/static/images/icons/more.svg" class="drm-img" alt="">
+                    </div>
+
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="dashboard-section2">
+            <div class="ds2-1">
+                <p class="dashboard-title">Today's Schedule</p>
+                <div class="db-dayswitcher">
+                    <div class="dayswitcher-btn" id="ds-prev">
+                        <img src="/static/images/icons/ds-prev.svg" class="ds-img" alt="">
+                    </div>
+                    <div class="dayswitcher-btn" id="ds-nxt">
+                        <img src="/static/images/icons/ds-nxt.svg" class="ds-img" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="ds2-2"></div>
+
+        </div>
+        <div class="dashboard-section3">
+            <div class="dashboard-travelhistory">
+                <p class="dashboard-title">Travel History</p>
+                <br>
+                <div class="thistory">
+                    <table class="thistory" style="width: 97%;">
+                        <tr style="height: 3em; border-bottom: 1px black solid;">
+                            <th style="text-align:center; width: 10%;">Date</th>
+                            <th style="padding-left: 5%; width: 50%;"> </th>
+                            <th style="width: 10%;"><img src="/static/images/icons/paisa.svg"  id="paisaaa"></th>
+                            <th style="width: 10%;"> </th>
+                        </tr>
+                        <tr style="height: 6.5em;">
+                            <td style="text-align: center; font-family: '400'; font-size: .95em;">12 dec</td>
+                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">Delhi to Kashmir (POK)</td>
+                            <td>1200</td>
+                            <td><img src="/static/images/icons/more.svg" class="moreee" alt=""></td>
+                        </tr>
+                        <tr style="height: 6.5em;">
+                            <td style="text-align: center; font-family: '400'; font-size: .95em;">12 dec</td>
+                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">Delhi to Kashmir (POK)</td>
+                            <td>1200</td>
+                            <td><img src="/static/images/icons/more.svg" class="moreee" alt=""></td>
+                        </tr>
+                        <tr style="height: 6.5em;">
+                            <td style="text-align: center; font-family: '400'; font-size: .95em;">12 dec</td>
+                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">Delhi to Kashmir (POK)</td>
+                            <td>1200</td>
+                            <td><img src="/static/images/icons/more.svg" class="moreee" alt=""></td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="dashboard-ongoing">
+                <div class="ongoing-status">
+                    <p id="ong-status">Delayed</p>
+                </div>
+                <div id="ststum">
+                    <div class="ongoing-timing">
+                        <p class="ong-date">TODAY</p>
+                        <p class="ong-time str-time">9:00AM</p>
+                        <img class="ong-img" src="/static/images/icons/ongoing-arow.svg" alt="">
+                        <p class="ong-time str-time">11:00PM</p>
+                    </div>
+                    <div class="ongoing-tf">
+                        <p class="ongtf-f">Delhi</p>
+                        <p class="ongtf-t"><span class="ongtf-span">to</span> Kashmir (POK)</p>
+                    </div>
+                </div>
+                <div class="ongoing-progress">
+                    <div class="progress-done"></div>
+                    <div class="progress-left"></div>
+                </div>
+                <div class="ongoing-atime">
+                    <div class="ogat-1">
+                        <img src="/static/images/icons/clok.svg" id="clok" alt="">
+                        <p id="ai">Arrival in</p>
+                    </div>
+                    <div class="ogat-2">
+                        <p id="ait">12 hours</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bookings-container">
+        <div class="bookings">
+            <div class="bookings-tickets">
+                <div class="bt-nav">
+                    <p class="bookings-title">Tickets</p>
+                    <div class="bookings-traintypes">
+                        <div class="bookings-traintype active">
+                            <p class="bookings-tt-txt">Seats</p>
+                        </div>
+                        <div class="bookings-traintype">
+                            <p class="bookings-tt-txt">Sleeper</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="systujmw">
+
+                    <div class="bookin-train">
+                        <div class="train-1 train">
+                            <svg width="89" height="271" viewBox="0 0 89 271" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect class="train-color train1-color" x="13" width="63" height="177" rx="31.5" fill="black"/>
+                                <rect id="sysgh" x="19" y="6" width="50" height="165" rx="25" fill="#2C2C2C"/>
+                                <rect class="train-color train1-color" y="21" width="89" height="250" rx="35" fill="black"/>
+                                <rect class="train1-seccolor" x="76" y="39" width="215" height="15" rx="7.5" transform="rotate(90 76 39)" fill="#2C2C2C"/>
+                                <rect class="train1-seccolor" x="30" y="39" width="215" height="15" rx="7.5" transform="rotate(90 30 39)" fill="#2C2C2C"/>
+                                <path id="train-text" d="M50.9053 137.755L50.9053 139.328L40 139.328L40 137.209L48.4438 137.209L47.1507 135.293L48.6307 134.389L50.9053 137.755ZM40 149.396L42.1655 148.664L42.1655 144.177L40 143.445L40 141.202L50.9053 145.128L50.9053 147.714L40 151.64L40 149.396ZM44.0505 144.816L44.0505 148.025L48.7709 146.421L44.0505 144.816Z" fill="white"/>
+                            </svg>                   </div>
+                        <div class="train-intersection">
+                            <svg width="8" height="23" viewBox="0 0 8 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="23" fill="black"/>
+                            </svg>                        
+                        </div>
+                        <div class="train-2 train">
+                            <svg width="89" height="250" viewBox="0 0 89 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect class="train-color train2-color" width="89" height="250" rx="35" fill="#969697"/>
+                                <rect class="train2-seccolor" x="76" y="17" width="215" height="15" rx="7.5" transform="rotate(90 76 17)" fill="#A7A7A9"/>
+                                <rect class="train2-seccolor" x="30" y="17" width="215" height="15" rx="7.5" transform="rotate(90 30 17)" fill="#A7A7A9"/>
+                                <path id="train-text" d="M50.9053 120.755L50.9053 122.328L40 122.328L40 120.209L48.4438 120.209L47.1507 118.293L48.6307 117.389L50.9053 120.755ZM45.7331 131.321C45.2501 132.381 44.3621 132.957 43.1469 132.957C41.2152 132.957 40 131.602 40 129.078L40 124.981L50.9053 124.981L50.9053 128.673C50.9053 131.165 49.7213 132.521 47.9764 132.521C46.9638 132.521 46.2316 132.1 45.7642 131.321L45.7331 131.321ZM49.0825 128.673L49.0825 127.099L46.3718 127.099L46.3718 128.673C46.3718 129.654 46.7457 130.402 47.7583 130.402C48.7554 130.402 49.0825 129.592 49.0825 128.673ZM41.8227 129.078C41.8227 130.09 42.3213 130.807 43.2872 130.807C44.2998 130.807 44.6893 130.028 44.6893 129.078L44.6893 127.099L41.8227 127.099L41.8227 129.078Z" fill="white"/>
+        
+                            </svg>
+        </div>
+                        <div class="train-intersection">
+                            <svg width="8" height="23" viewBox="0 0 8 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="23" fill="black"/>
+                            </svg>
+                        </div>
+                        <div class="train-3 train">
+                            <svg width="89" height="250" viewBox="0 0 89 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect class="train-color train3-color" width="89" height="250" rx="35" fill="#969697"/>
+                                <rect class="train3-seccolor" x="76" y="17" width="215" height="15" rx="7.5" transform="rotate(90 76 17)" fill="#A7A7A9"/>
+                                <rect class="train3-seccolor" x="30" y="17" width="215" height="15" rx="7.5" transform="rotate(90 30 17)" fill="#A7A7A9"/>
+                                <path id="train-text" d="M50.9053 117.755L50.9053 119.328L40 119.328L40 117.209L48.4438 117.209L47.1507 115.293L48.6307 114.389L50.9053 117.755ZM41.8072 127.137C41.8072 128.274 42.2745 129.147 42.9756 129.723L41.8227 131.468C40.5764 130.487 39.7975 128.96 39.7975 127.137C39.7975 123.912 42.2589 121.591 45.4526 121.591C48.6463 121.591 51.0922 123.912 51.0922 127.137C51.0922 128.96 50.3288 130.487 49.0669 131.468L47.9141 129.723C48.6152 129.147 49.0825 128.274 49.0825 127.137C49.0825 124.878 47.2598 123.71 45.4526 123.71C43.6299 123.71 41.8072 124.878 41.8072 127.137Z" fill="white"/>
+                            </svg>
+                                  
+                        </div>
+                    </div>
+                </div>
+                <div class="train-zoomedin">
+                    <div class="train1">
+                        <img src="/static/images/tsil.svg" class="tzi-silhouette tr1" alt="">
+                        <div class="sywr tr1">
+                            <p class="tc-no">1A</p>
+                            <div class="tc-compak">
+                                <div class="ihddis">
+                                    <div class="lvisbhaiii" id="seat-1"></div>
+                                    <div class="lvisbhaiii" id="seat-2"></div>
+                                    <div class="lvisbhaiii" id="seat-3"></div>
+                                    <div class="lvisbhaiii" id="seat-4"></div>
+                                    <div class="lvisbhaiii" id="seat-5"></div>
+                                    <div class="lvisbhaiii" id="seat-6"></div>
+                                    <div class="lvisbhaiii" id="seat-7"></div>
+                                    <div class="lvisbhaiii" id="seat-8"></div>
+                                    <div class="lvisbhaiii" id="seat-9"></div>
+                                    <div class="lvisbhaiii" id="seat-10"></div>
+                                    <div class="lvisbhaiii" id="seat-11"></div>
+                                    <div class="lvisbhaiii" id="seat-12"></div>
+                                </div>
+                                <div class="vrr"></div>
+                                <div class="ihddis">
+                                    <div class="lvisbhaiii" id="seat-13"></div>
+                                    <div class="lvisbhaiii" id="seat-14"></div>
+                                    <div class="lvisbhaiii" id="seat-15"></div>
+                                    <div class="lvisbhaiii" id="seat-16"></div>
+                                    <div class="lvisbhaiii" id="seat-17"></div>
+                                    <div class="lvisbhaiii" id="seat-18"></div>
+                                    <div class="lvisbhaiii" id="seat-19"></div>
+                                    <div class="lvisbhaiii" id="seat-20"></div>
+                                    <div class="lvisbhaiii" id="seat-21"></div>
+                                    <div class="lvisbhaiii" id="seat-22"></div>
+                                    <div class="lvisbhaiii" id="seat-23"></div>
+                                    <div class="lvisbhaiii" id="seat-24"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="train2">
+                        <img src="/static/images/tsil.svg" class="tzi-silhouette tr2" alt="">
+                        <div class="sywr tr2">
+                            <p class="tc-no">1B</p>
+                            <div class="tc-compak">
+                                <div class="ihddis">
+                                    <div class="lvisbhaiii" id="seat-25"></div>
+                                    <div class="lvisbhaiii" id="seat-26"></div>
+                                    <div class="lvisbhaiii" id="seat-27"></div>
+                                    <div class="lvisbhaiii" id="seat-28"></div>
+                                    <div class="lvisbhaiii" id="seat-29"></div>
+                                    <div class="lvisbhaiii" id="seat-30"></div>
+                                    <div class="lvisbhaiii" id="seat-31"></div>
+                                    <div class="lvisbhaiii" id="seat-32"></div>
+                                    <div class="lvisbhaiii" id="seat-33"></div>
+                                    <div class="lvisbhaiii" id="seat-34"></div>
+                                    <div class="lvisbhaiii" id="seat-35"></div>
+                                    <div class="lvisbhaiii" id="seat-36"></div>
+                                </div>
+                                <div class="vrr"></div>
+                                <div class="ihddis">
+                                    <div class="lvisbhaiii" id="seat-37"></div>
+                                    <div class="lvisbhaiii" id="seat-38"></div>
+                                    <div class="lvisbhaiii" id="seat-39"></div>
+                                    <div class="lvisbhaiii" id="seat-40"></div>
+                                    <div class="lvisbhaiii" id="seat-41"></div>
+                                    <div class="lvisbhaiii" id="seat-42"></div>
+                                    <div class="lvisbhaiii" id="seat-43"></div>
+                                    <div class="lvisbhaiii" id="seat-44"></div>
+                                    <div class="lvisbhaiii" id="seat-45"></div>
+                                    <div class="lvisbhaiii" id="seat-46"></div>
+                                    <div class="lvisbhaiii" id="seat-47"></div>
+                                    <div class="lvisbhaiii" id="seat-48"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="train3">
+                        <img src="/static/images/tsil.svg" class="tzi-silhouette tr3" alt="">
+                        <div class="sywr tr3">
+                            <p class="tc-no">1C</p>
+                            <div class="tc-compak">
+                                <div class="ihddis">
+                                    <div class="lvisbhaiii" id="seat-49"></div>
+                                    <div class="lvisbhaiii" id="seat-50"></div>
+                                    <div class="lvisbhaiii" id="seat-51"></div>
+                                    <div class="lvisbhaiii" id="seat-52"></div>
+                                    <div class="lvisbhaiii" id="seat-53"></div>
+                                    <div class="lvisbhaiii" id="seat-54"></div>
+                                    <div class="lvisbhaiii" id="seat-55"></div>
+                                    <div class="lvisbhaiii" id="seat-56"></div>
+                                    <div class="lvisbhaiii" id="seat-57"></div>
+                                    <div class="lvisbhaiii" id="seat-58"></div>
+                                    <div class="lvisbhaiii" id="seat-59"></div>
+                                    <div class="lvisbhaiii" id="seat-60"></div>
+                                </div>
+                                <div class="vrr"></div>
+                                <div class="ihddis">
+                                    <div class="lvisbhaiii" id="seat-61"></div>
+                                    <div class="lvisbhaiii" id="seat-62"></div>
+                                    <div class="lvisbhaiii" id="seat-63"></div>
+                                    <div class="lvisbhaiii" id="seat-64"></div>
+                                    <div class="lvisbhaiii" id="seat-65"></div>
+                                    <div class="lvisbhaiii" id="seat-66"></div>
+                                    <div class="lvisbhaiii" id="seat-67"></div>
+                                    <div class="lvisbhaiii" id="seat-68"></div>
+                                    <div class="lvisbhaiii" id="seat-69"></div>
+                                    <div class="lvisbhaiii" id="seat-70"></div>
+                                    <div class="lvisbhaiii" id="seat-71"></div>
+                                    <div class="lvisbhaiii" id="seat-72"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="booking-userarea">
+                <form id="booking-userform" action="">
+                    <div class="booking-userform-section">
+                        <div>
+                            <label class="booking-label" for="booking-date">Date</label>
+                            <input type="date" max="2023-12-12" class="booking-input" id="booking-date">
+                        </div>
+                        <div>
+                            <label class="booking-label" for="booking-time">Time</label>
+                            <input onclick="showBookingTime()" class="booking-input" type="time" name="" id="booking-time">
+                        </div>
+                        <div>
+                            <label class="booking-label type2" for="booking-passengers">Passengers</label>
+                            <input class="booking-input type2" type="number" maxlength="1" min="1" max="9" inputmode="numeric" value="1" id="booking-passengers">
+                        </div>
+                    </div>
+                    <div class="booking-userform-section">
+                        <div>
+                            <label class="booking-label" for="booking-from">From</label>
+                            <input  class="booking-input booking-from" style="cursor: pointer;" placeholder="Select station" id="booking-from">
+                        </div>
+                        <div>
+                            <label class="booking-label" for="booking-to">To</label>
+                            <input  class="booking-input booking-to" style="cursor: pointer;" placeholder="Select station" id="booking-to">
+                        </div>
+                  
+                    </div>
+                    <div class="booking-section">
+
+                        <div>
+    
+                            <div class="ticket-details">
+                                <div class="ongoing-status" style="right: 1.5em; top: 2em;">
+                                    <p id="ong-status">Hide</p>
+                                </div>
+                                <p class="bookings-title">Travel Details</p>
+                                <div class="tdm">
+                                    <div class="ticket-detail">
+                                        <p class="ticket-detail-title">TIME</p>
+                                        <p class="ticket-detail-d" id="taime">NaN HRS</p>
+                                    </div>
+                                    <div class="ticket-detail">
+                                        <p class="ticket-detail-title">DISTANCE</p>
+                                        <p class="ticket-detail-d" id="distunce">NaN KM</p>
+                                    </div>
+                                    <div class="ticket-detail">
+                                        <p class="ticket-detail-title">STATIONS IN BETWEEN</p>
+                                        <p class="ticket-detail-d" id="staiotn">NaN</p>
+                                    </div>
+                                    <div class="ticket-detail">
+                                        <p class="ticket-detail-title">TOTAL FARE</p>
+                                        <p class="ticket-detail-d" id="fairr">Rs. NaN</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <button type="submit" id="booking-submit">
+                                <p class="bookings-title" style="font-family: '400';
+                                margin-left: 2em;">Proceed</p>
+                                <div class="systummmmm">
+                                    <img src="/static/images/icons/next.svg" id="booking-proceed" alt="">
+                                </div>
+                            </button>
+                        </div>
+                        <div class="booking-stationindex">
+                            <div class="booking-imgs">
+                                <div class="booking-station b-s1">
+                                    <img src="/static/images/icons/b1.svg" class="b-start b-stopimg" alt="">
+                                    <p class="booking-station-text bst">NaN</p>
+                                </div>
+                                <div class="booking-divvv">
+                                    <img src="/static/images/icons/bdiv.svg" class="bdiv-img" alt="">
+                                </div>
+                                <div class="all-stations">
+
+                                </div>
+                                <div class="booking-station b-dest">
+                                    <img src="/static/images/icons/bd.svg" class="b-end b-stopimg" alt="">
+                                    <p class="booking-station-text bstt">NaN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <form action="" id="bookings-form">
+    <div class="bookings-step2-container">
+        <div id="uheh">
+            
+        
+        <div class="bookings-step2">
+            <div class="bookings-step2-food">
+                <p class="bookings-title">Book your meal</p>
+                <div class="bookmeal-nav">
+                    <div class="vegnonveg">
+                        <div class="veg-slider nav-slider">
+                            <p></p>
+                        </div>
+                        <div class="nonveg-slider nav-slider">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="food-main">
+                    {{range .food}}
+                    <div class="food-1">
+                        <div class="food-imgdiv">   
+                            <div class="foodadddiv" id="foodadd-{{.ID}}">
+                                <p class="foodplus">+</p>
+                                <p class="foodadd">Add</p>
+                            </div>
+                            <img src="/static/images/food/{{.Title}}.svg" class="food-img" alt="">
+                        </div>
+                        <div class="food-detailss">
+                            <div class="food-details">
+                                <p class="food-title">{{.Title}}</p>
+                                <p class="food-customise">Customize</p>
+                            </div>
+                            <div class="food-price">
+                                <p class="fp-txt">₹{{.Price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                </div>
+
+            </div>
+            <div class="booking2-section2">
+                <div class="bookings-step2-hotel">
+                    <p class="bookings-title">Find a Hotel</p>
+                    <div id="bookings-step2-form">
+                        <div class="bookings-2-hotelform" style="margin-top: 0em;">
+                            <label class="bookings2-label" for="bookings-step2-hotel-quality">Quality</label>
+                            <input type="text" class="bookings2-input" value="⭐⭐⭐" list="booking2-quality">
+                        </div>
+                        <datalist id="booking2-quality">
+                            <option value="⭐"></option>
+                            <option value="⭐⭐"></option>
+                            <option value="⭐⭐⭐"></option>
+                            <option value="⭐⭐⭐⭐"></option>
+                            <option value="⭐⭐⭐⭐⭐"></option>
+                        </datalist>
+                        <div class="bookings-2-hotelform">
+                            <label class="bookings2-label" for="bookings-step2-hotel-location">Location</label>
+                            <input type="text" class="bookings2-input" placeholder="Near station" list="booking2-location">
+                            <datalist id="booking2-location">
+                                <option value="Near station"></option>
+                                <option value="Main City"></option>
+                            </datalist>
+                        </div>
+                        <div class="bookings-2-hotelform sysium">
+                            <div class="inline-banao">
+
+                                <label class="bookings2-label sori-darling" for="bookings-step2-hotel-price">Price</label>
+                                <input type="number" min="500" max="10000" class="bookings2-input price-input" placeholder="₹₹₹" >
+                            </div>
+                            <div class="inline-banao">
+                                <p id="to">to</p>
+                                <input type="number" min="500" max="10000" class="bookings2-input price-input" placeholder="₹₹₹₹₹" >
+                            </div>
+                        </div>
+                        <div class="bookings-2-hotelform">
+                            <label class="bookings2-label" for="bookings-step2-hotel-rooms">Rooms</label>
+                            <input type="number" class="bookings2-input yshywen" placeholder="3" list="booking2-rooms">
+                            <datalist id="booking2-rooms">
+                                <option value=1></option>
+                                <option value=2></option>
+                                <option value=3></option>
+                                <option value=4></option>
+                                <option value=5></option>
+                            </datalist> 
+                        </div>
+                        <div class="bookings-2-hotelform">
+                            <label class="bookings2-label" for="bookings-step2-hotel-buffet">Buffet</label>
+                            <input type="text" value="Included" class="bookings2-input" list="booking2-buffet">
+                            <datalist id="booking2-buffet">
+                                <option value="Included"></option>
+                                <option value="Not Included"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-payment-details">
+                    <div class="paymenttt">
+                        <div id="payment-base" class="payment-rp">
+                            <p class="payment-titleee">Base Price</p>
+                            <p class="payment-priceee">₹102</p>
+                        </div>
+                        <div id="payment-addi" class="payment-rp">
+                            <p class="payment-titleee">Base Price</p>
+                            <p class="payment-priceee">₹102</p>
+                        </div>
+                    </div>
+                    <div id="payeue">
+                        <p id="totalcost-book" class="pay-price">₹1200</p>
+                        <button class="paybtn">Pay</button>
+
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="booking-stations">
+    <p class="suqwrj">x</p>
+    <div class="bs-main">
+        <div class="bs-search">
+            <div class="section2-search">
+                <form action="">
+                <button class="search-btn">
+                    <img src="/static/images/icons/search.svg" class="search-btn-icon" alt="">
+                </button>
+                    <input id="sije" oninput="bookingSearch()" type="text" class="search-btn-nav" placeholder="Type something...">
+                </form>
+            </div>
+        </div>
+        <div class="bs-all">
+            <table class="wor" style="width: 100%;">
+                <tr style="border-bottom: white 1px solid; ">
+                    <th style="border-bottom: white 1px solid; padding-bottom: 1em; color: whitesmoke; font-size: .9em; width: 25%;">Station Code</th>
+                    <th style="border-bottom: white 1px solid; padding-bottom: 1em; color: whitesmoke; font-size: .9em;">Station Name</th>
+                    <th style="border-bottom: white 1px solid; padding-bottom: 1em; color: whitesmoke; font-size: .9em; width: 25%;">Location</th>
+                </tr>
+                <br>
+                    {{range .stations}}
+                    <tr class="sysqu3r" id="station-{{.Code}}">
+                        <td class="wqeorij">{{.Code}}</td>
+                        <td class="wqeorij">{{.Sname}}</td>
+                        <td class="wqeorij">{{.Location}}</td>
+                    </tr>
+                    {{end}}
+            </table>
+        </div>
+    </div>
+</div>
+<div class="bs22">
+    <p class="suqwrj">x</p>
+    <div class="bs-main">
+        <div class="bs-search">
+            <div class="section2-search">
+                <form action="">
+                <button class="search-btn">
+                    <img src="/static/images/icons/search.svg" class="search-btn-icon" alt="">
+                </button>
+                    <input id="sijee" oninput="bookingSearch2()" type="text" class="search-btn-nav" placeholder="Type something...">
+                </form>
+            </div>
+        </div>
+        <div class="bs-all">
+            <table class="wor" style="width: 100%;">
+                <tr style="border-bottom: white 1px solid; ">
+                    <th style="border-bottom: white 1px solid; padding-bottom: 1em; color: whitesmoke; font-size: .9em; width: 25%;">Station Code</th>
+                    <th style="border-bottom: white 1px solid; padding-bottom: 1em; color: whitesmoke; font-size: .9em;">Station Name</th>
+                    <th style="border-bottom: white 1px solid; padding-bottom: 1em; color: whitesmoke; font-size: .9em; width: 25%;">Location</th>
+                </tr>
+                <br>
+                    {{range .stations}}
+                    <tr class="sysjrewj" id="station-{{.Code}}">
+                        <td class="wqeorij">{{.Code}}</td>
+                        <td class="wqeorij">{{.Sname}}</td>
+                        <td class="wqeorij">{{.Location}}</td>
+                    </tr>
+                    {{end}}
+            </table>
+        </div>
+    </div>
+</div>
+
+{{else}}
+error
+{{end}}
+    <!-- <div class="server-messages" id="sm">
+        <div class="server-message">
+            <p class="server-message-status">Error</p>
+            <p class="server-messagee">systum is riyal</p>
+        </div>
+    </div> -->
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+<script src="/static/js/main.js"> </script>

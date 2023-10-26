@@ -1,0 +1,8 @@
+[{"id":1, "title":"Fried Chicken Meal", "price":312, "vegnonveg":"nonveg"},
+ {"id":2, "title":"PPAP", "price":102, "vegnonveg":"veg"},
+ {"id":3, "title":"Hara Bhara Kabab", "price":200, "vegnonveg":"veg"},
+ {"id":4, "title":"Chicken and Rice", "price":320, "vegnonveg":"nonveg"},
+ {"id":5, "title":"Anda", "price":1000, "vegnonveg":"nonveg"},
+ {"id":6, "title":"Snackkkk \ud83d\ude2b", "price":70000, "vegnonveg":"nonveg"},
+ {"id":7, "title":"Kashmiri Gola", "price":6500, "vegnonveg":"veg"},
+ {"id":8, "title":"Modi ki bandi", "price":20, "vegnonveg":"nonveg"}]

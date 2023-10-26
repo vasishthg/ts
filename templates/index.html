@@ -964,3 +964,77 @@ error
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="/static/js/main.js"> </script>
+
+<!-- CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(415) NOT NULL,
+  `email` varchar(415) NOT NULL,
+  `phone` varchar(415) NOT NULL,
+  `DOB` date NOT NULL,
+  `password` varchar(145) NOT NULL,
+  `history` json DEFAULT NULL,
+  `aadhar` varchar(4115) NOT NULL,
+  `location` varchar(415) DEFAULT NULL,
+  `balance` int DEFAULT '0',
+  `points` int DEFAULT '0',
+  `ongoing` varchar(45) DEFAULT NULL,
+  `events` json DEFAULT NULL,
+  `reccomended` json DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; -->
+
+
+<!-- 
+    CREATE TABLE `travel` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user` varchar(415) DEFAULT NULL,
+  `from` varchar(415) DEFAULT NULL,
+  `to` varchar(415) DEFAULT NULL,
+  `train` int DEFAULT NULL,
+  `seats` json DEFAULT NULL,
+  `passengers` int DEFAULT NULL,
+  `start` time DEFAULT NULL,
+  `duration` time DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `hotel` tinyint(1) DEFAULT NULL,
+  `cost` int DEFAULT NULL,
+  `food` json DEFAULT NULL,
+  `status` varchar(45) DEFAULT 'upcoming',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+ -->
+
+<!-- 
+    CREATE TABLE `trains` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `from` varchar(45) DEFAULT NULL,
+  `to` varchar(45) DEFAULT NULL,
+  `stations` json DEFAULT NULL,
+  `occupied` json DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+ -->
+
+ <!-- 
+    CREATE TABLE `stations` (
+  `code` varchar(45) NOT NULL,
+  `sname` text,
+  `location` text,
+  `trainnumber` bigint DEFAULT NULL,
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+  -->
+
+  <!-- 
+    CREATE TABLE `food` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(415) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `vegnonveg` varchar(415) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+   -->

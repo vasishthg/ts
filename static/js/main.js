@@ -1,7 +1,9 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    setTimeout(function(){
-        $(".loader").hide("slide", {direction: "up"}, 400)
-    }, 400);
+$(document).ready(function(){
+    $(window).on('load', function() {
+        setTimeout(function(){
+            $(".loader").hide("slide", {direction: "up"}, 400);
+        }, 400);
+    });
 });
 
 
@@ -233,7 +235,8 @@ $(".goto-home").click(function(){
     $(allnavlinks).removeClass("navlink-active")
     $(this).addClass("navlink-active")
     $(".dashboard-gradient").fadeIn()
-    $("#uheh").fadeOut()
+            $(".bookings-step2-container").fadeOut()
+            $("#uheh").fadeOut()
     $(".booking-gradient").fadeOut()
     $(".bookin-train").hide("slide", {direction: "down"}, 500)
     setTimeout(function(){
@@ -253,6 +256,8 @@ $(".goto-book").click(function(){
     $(allnavlinks).removeClass("navlink-active")
     $(this).addClass("navlink-active")
     $(".dashboard-gradient").fadeOut()
+            $(".bookings-step2-container").fadeOut()
+            $("#uheh").fadeOut(200)
     $(".booking-gradient").fadeIn()
     $(".dashboard-section1").hide("slide", {direction: "left"}, 600)
     $(".dashboard-section3").hide("slide", {direction: "right"}, 600)
@@ -264,6 +269,7 @@ $(".goto-book").click(function(){
             $(".bookings-tickets").hide()
             $(".booking-userarea").hide()
             $(".bookings-container").show()
+            
             setTimeout(function(){
                 $(".bookings-tickets").show("slide", {direction: "left"}, 600)
                 $(".booking-userarea").show("slide", {direction: "right"}, 600)
@@ -343,54 +349,11 @@ $(".sysjrewj").click(function () {
 
 
 $(".booking-userform").submit(function(){
-    storeForm1()
-    
+    event.preventDefault()
+    $("#booking-submit").click()
 })
-function storeForm1(){
-    var storeorigin = originStationCode
-    var storedestination = destinationStationCode
-    var storetrain = null
-    var storeseats = selectedSeats;
-    var storedate = document.getElementById("booking-date").value;
-    var storetime = document.getElementById("taime").textContent;
-    var storepassengers = document.getElementById("booking-passengers").value;
-    var storefair = document.getElementById("fairr").textContent;
-    $.ajax({
-        url: "/ajax/gettrain",
-        type: "POST",
-        data: {
-            origin: storeorigin,
-            destination: storedestination
-        },
-        success: function (response) {
-            storetrain = response['id']
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-    event.preventDefault();
-    goToBookings2(storeorigin, storedestination, storetrain, storeseats, storedate, storetime, storepassengers, storefair)
-
-}
-function goToBookings2(){
-    $(".bookin-train").hide("slide", {direction: "down"}, 500)
-    $(".bookings-tickets").hide("slide", {direction: "left"}, 600)
-    $(".booking-userarea").hide("slide", {direction: "right"}, 600)
-    $("#uheh").fadeOut()
-    setTimeout(function(){
-        $(".bookings-step2-container").show()
-        setTimeout(function(){
-            fadeInBookings2()
-        }, 1000)    }, 600)
-}
-function fadeInBookings2(){
-    $("#uheh").fadeIn()
-
-}
 $("#booking-submit").click(function(){
     storeForm1()
-    event.preventDefault()
 })
 var maxSeatsToSelect = $("#booking-passengers").val(); 
 $("#booking-passengers").change(function () {
@@ -491,25 +454,25 @@ function handleTripData() {
 
                 }
                 const apiKey = 'ieZCkecJUpvKR0UK1c22D6eBP06kv4eh'; 
-                // const apiUrl = `https://www.mapquestapi.com/directions/v2/route?key=${apiKey}&from=${origin}&to=${destination}`;
+                const apiUrl = `https://www.mapquestapi.com/directions/v2/route?key=${apiKey}&from=${origin}&to=${destination}`;
                 $("#staiotn").text(response['len'])
-                // $.get(apiUrl, function(data) {
-                //     if (data.route) {
-                //         console.log("data: ", data.route);
-                //         const distance = Math.floor(data.route.distance);
-                //         const time = data.route.formattedTime;
-                //         $("#taime").text(time + " Hrs");
-                //         var passengers = $("#booking-passengers").val();
-                //         var fair = Math.floor(distance * 1.4 * passengers);
-                //         $("#fairr").text("Rs. " + fair);
-                //         console.log(fair);
-                //         $("#distunce").text(distance + " KM");
-                //     } else {
-                //         console.log('system hang');
-                //     }
-                // }).fail(function() {
-                //     console.error('system crash');
-                // });
+                $.get(apiUrl, function(data) {
+                    if (data.route) {
+                        console.log("data: ", data.route);
+                        const distance = Math.floor(data.route.distance);
+                        const time = data.route.formattedTime;
+                        $("#taime").text(time + " Hrs");
+                        var passengers = $("#booking-passengers").val();
+                        var fair = Math.floor(distance * 1.4 * passengers);
+                        $("#fairr").text("Rs. " + fair);
+                        console.log(fair);
+                        $("#distunce").text(distance + " KM");
+                    } else {
+                        console.log('system hang');
+                    }
+                }).fail(function() {
+                    console.error('system crash');
+                });
             },
             error: function (error) {
                 console.log(error);
@@ -517,6 +480,110 @@ function handleTripData() {
         });
     }
 }
+var baseprice = 0
+var storeorigin = null
+var storedestination = null
+var storeseats = null
+var storedate = null
+var storetime = null
+var storepassengers = null
+var storefair = null
+var storestart = null
+var storetrain = null    
+function storeForm1(){
+    storeorigin = originStationCode
+    storedestination = destinationStationCode
+    storeseats = selectedSeats;
+    storedate = document.getElementById("booking-date").value;
+    storedate = storedate.replace(" Hrs.", "")
+    storetime = document.getElementById("taime").textContent;
+    storetime = storetime.replace(" Hrs", "")
+    storestart = document.getElementById("booking-time").value;
+    storepassengers = document.getElementById("booking-passengers").value;
+    storefair = document.getElementById("fairr").textContent;
+    storefair = storefair.replace("Rs. ", "")
+    storefair = parseInt(storefair)
+    console.log(storefair)
+    
+    $.ajax({
+        url: "/ajax/gettrain",
+        type: "POST",
+        data: {
+            origin: storeorigin,
+            destination: storedestination
+        },
+        success: function (response) {
+            storetrain = response['id']
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+    event.preventDefault();
+    if (originStationCode === null || destinationStationCode === null || selectedSeats.length === 0 || document.getElementById("booking-date").value === "" || document.getElementById("taime").textContent === "" || document.getElementById("booking-passengers").value === "" || document.getElementById("fairr").textContent === "" || selectedSeats.length < document.getElementById("booking-passengers").value){
+        alert("Please fill all the fields")
+        return
+    }
+    goToBookings2(storeorigin, storedestination, storetrain, storeseats, storedate, storetime, storepassengers, storefair)
+
+}
+var totalcost = 0
+function goToBookings2(storeorigin, storedestination, storetrain, storeseats, storedate, storetime, storepassengers, storefair){
+    $(".bookings-container").hide("slide", {direction: "up"}, 200)
+    setTimeout(function(){
+
+        $(".bookings-step2-container").show("slide", {direction: "up"}, 200)
+    },200)
+    baseprice += storefair
+    baseprice += 2000
+    updatePrice()
+    
+}
+
+function updatePrice(){
+    $("#addcost").text("₹ " + (Math.floor(baseprice * 8/100)))
+    $("#baseprice").text("₹ " +  baseprice)
+    totalcost = baseprice+Math.floor(baseprice * 18/100)
+    $("#totalcost-book").text("₹ " + totalcost)
+}
+
+$(document).on("click", ".removehotel", function() {
+ 
+    $(".bookings2-input").attr("disabled", "disabled");
+    $(".bookings2-input").animate({
+        backgroundColor: "#3A3A3A"
+    });
+    $(".bookings2-input").css("cursor", "not-allowed");
+    $(".bookings2-input").val("");
+    $(this).animate({
+        color: "#2CE328",
+        backgroundColor: "#1E3222"
+    });
+    $(`#ong-status2`).text("add");
+    $(this).addClass("addhotel");
+    $(this).removeClass("removehotel");
+    baseprice -= 2000
+    updatePrice()
+
+});
+
+$(document).on("click", ".addhotel", function() {
+    $(".bookings2-input").removeAttr("disabled");
+    $(".bookings2-input").animate({
+        backgroundColor: "#1c1c1c"
+    });
+    $(".bookings2-input").css("cursor", "pointer");
+    $(this).animate({
+        color: "#E33E28",
+        backgroundColor: "#32211E"
+    });
+    $(`#ong-status2`).text("remove");
+    $(this).addClass("removehotel");
+    $(this).removeClass("addhotel");
+    baseprice += 2000
+    updatePrice()
+});
+
 
 function bookingSearch(){
     let searchquery = document.getElementById('sije').value 
@@ -531,6 +598,8 @@ function bookingSearch(){
         } 
     } 
 }
+
+
 function bookingSearch2(){
     let searchquery = document.getElementById('sijee').value 
     searchquery=searchquery.toUpperCase(); 
@@ -593,6 +662,91 @@ $(".bookings-traintype").click(function(){
     $(".bookings-traintype").removeClass("active")
     $(this).addClass("active")
 })
+foodlist = []
+$(".foodadddiv").click(function(){
+    if ($(this).hasClass("foodadded") == true){
+        return
+    }
+    eid = $(this).attr("id")
+    eid = eid.replace("foodadd-", "")
+    foodlist.push(eid)
+    $.ajax({
+        url: '/ajax/getprice',
+        type: 'POST',
+        data: {
+            id: eid
+        },
+        success: function(response){
+            console.log(response)
+            baseprice += response['price']
+            updatePrice()
+            $(`#foodadd-${eid}`).addClass("foodadded")
+            $(`#foodadddd-${eid}`).text("Added")
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+})
+$(document).on("click", ".foodadded", function(){
+    eid = $(this).attr("id")
+    eid = eid.replace("foodadd-", "")
+    foodlist.splice(foodlist.indexOf(eid), 1)
+    $.ajax({
+        url: '/ajax/getprice',
+        type: 'POST',
+        data: {
+            id: eid
+        },
+        success: function(response){
+            console.log(response)
+            baseprice -= response['price']
+            updatePrice()
+            $(`#foodadd-${eid}`).removeClass("foodadded")
+            $(`#foodadddd-${eid}`).text("Add")
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+})
+
+$("#bookings-form").submit(function(){
+    passToServer();
+})
+function passToServer(){
+    totalcost = parseFloat(totalcost)
+    var hotel 
+    if ($(".removehotel").hasClass("removehotel") == true){
+        hotel = 1
+    } else{
+        hotel =0
+    }
+    $.ajax({
+        url: "/ajax/bookinfo",
+        type: "POST",
+        data:{
+            from: storeorigin,
+            to: storedestination,
+            train: storetrain,
+            seats: JSON.stringify(storeseats),
+            passengers: storepassengers,
+            start: storestart,
+            duration: storetime,
+            date: storedate,
+            hotel: hotel,
+            price: totalcost,
+            food: JSON.stringify(foodlist),
+        },
+        success: function(response){
+            console.log(response)
+            window.location.href= "/checkout"
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+}
 // 969697
 // A7A7A9
 // async function throwError(s, c, m){

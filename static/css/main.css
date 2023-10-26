@@ -444,6 +444,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: #260A07;
     transition: all 0.5s ease-in-out;
 }
+.foodadddiv.foodadded{
+    background-color: white;
+    color: black;
+}
 
 .server-message:hover{
     transform: translateY(-.4em);
@@ -748,6 +752,7 @@ vertical-align: middle;
 .dashboard-main{
     display: grid;
     grid-template-columns: 28% auto 35%;
+    height: 80%;
     padding: 2em 1.5em 2em 1.5em;
 }
 
@@ -760,11 +765,10 @@ vertical-align: middle;
 
 .bookings-container{
     display: none;
-
 }
 
 .bookings-step2-container{
-    display: none;
+   display: none;
 }
 
 
@@ -980,6 +984,10 @@ vertical-align: middle;}
 }
 .dashboard-section2{
     margin-left: 2em;
+    position: relative;
+    height: 95%;
+    overflow: hidden;
+    
 }
 
 .db-dayswitcher{
@@ -1111,9 +1119,10 @@ td, table{
     border-radius: 10em;
 }
 
-#ong-status{
+#ong-status, #ong-status2, #ong-status3{
     margin-block-start: .5em;
     font-size: .8em;
+    cursor: pointer;
     font-family: '500';
     margin-block-end: .50em;
 }
@@ -1737,6 +1746,10 @@ vertical-align: middle;
     padding: .5em 1em 1em 1.75em;
 }
 
+#uheh{
+    display: none;
+}
+
 .booking-payment-details{
     background-color: #EAEAEA;
     color: black;
@@ -1906,4 +1919,52 @@ transition: all .5s ;
 .foodadddiv:hover{
     background: rgba(255, 255, 255, 0.503);
     color: black;
+}
+
+.schedule{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.ds2-2{
+    position: relative;
+    height: 95%;
+    margin-top: 1em;
+    width: 30em;
+    overflow: auto;
+}
+
+.schedule-hours{
+    text-align: right;
+    
+
+}
+
+.schedule-hour{
+    margin-bottom: 2em;
+    display: grid;
+    grid-template-columns: auto auto;
+    
+}
+
+
+.ds2-2::-webkit-scrollbar{
+    width: 0;
+}
+
+.s-line, .sh-t{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: .75em;
+    font-family: '300';
+    margin-block-start: 0;
+    color: #cbcbcb;
+}
+
+.s-line{
+    width: 95%;
+    margin-top: .75em;
+    margin-right: 1em;
+
 }

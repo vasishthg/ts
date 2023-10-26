@@ -1,0 +1,46 @@
+<link rel="icon" href="/static/images/logo.svg">
+<title>Payment Completed!</title>
+<body>
+
+    <div class="card">
+        <img src="/static/images/icons/tick.svg" class="sustim" alt="">
+        <p id="" style="font-size: 2.3em; margin-block-end: 0;">Success!</p>
+        <p id="" style="font-size: .8em; color: rgb(154, 154, 154);">Payment completed. You will be redirected shortly.</p>
+    </div> 
+</body>
+<style>
+    @font-face {
+        font-family: '400';
+        src: url(/static/fonts/regular.otf);
+    }
+    @font-face {
+        font-family: '300';
+        src: url(/static/fonts/light.otf);
+    }
+    body{
+        background-color: rgb(19, 19, 19);
+        font-family: '400';
+    }
+
+    .sustim{
+        width: 50%;
+        margin-top: 5em;
+    }
+    .card{
+        position: absolute;
+        left: 50%;
+        text-align: center;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
+        color: white;
+        height: 74%;
+        border-radius: 2em;
+        border: 2px solid rgb(116, 116, 116);
+    }
+</style>
+<Script>
+    setTimeout(function(){
+        window.location.href = "/";
+    }, 3000);
+</Script>

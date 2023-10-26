@@ -5,11 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/stripe/stripe-go/v76"
+	"github.com/stripe/stripe-go/v76/checkout/session"
 )
 
 type User struct {
@@ -34,10 +37,28 @@ type Station struct {
 	Location string `json:"location"`
 }
 
+type Travel struct {
+	ID         int    `json:"id"`
+	User       string `json:"user"`
+	From       string `json:"from"`
+	To         string `json:"to"`
+	Train      int    `json:"train"`
+	Seats      []byte `json:"seats"`
+	Passengers int    `json:"passengers"`
+	Start      string `json:"start"`
+	Duration   string `json:"duration"`
+	Date       []byte `json:"date"`
+	Hotel      bool   `json:"hotel"`
+	Cost       int    `json:"cost"`
+	Food       []byte `json:"food"`
+	Status     string `json:"status"`
+}
+
 func main() {
 	router := gin.Default()
 	store := cookie.NewStore([]byte("3214cf255f0728c909157b4395b5fce95a67e46051f2a4138ac5fb573ff0444a"))
 	router.Use(sessions.Sessions("ts", store))
+	stripe.Key = "sk_test_51Md9OfSElK6vRIkdeUZfai2ParU3JrKolpmWR2KPJRXPHYVTlKZsTQp88bjFBXEWG647LN82YslGMdcc6NL0CiFR002bYVZK1w"
 
 	db, err := sql.Open("mysql", "root:toor@tcp(localhost:3306)/ts")
 	if err != nil {
@@ -123,7 +144,6 @@ func main() {
 			})
 		}
 	})
-
 	router.POST("/ajax/signup", func(c *gin.Context) {
 		fname := (c.PostForm("fname"))
 		lname := (c.PostForm("lname"))
@@ -199,7 +219,6 @@ func main() {
 		}
 
 	})
-
 	router.POST("/ajax/login", func(c *gin.Context) {
 		email := c.PostForm("email")
 		password := c.PostForm("password")
@@ -228,7 +247,6 @@ func main() {
 			})
 		}
 	})
-
 	router.POST("/ajax/getstation", func(c *gin.Context) {
 		code := c.PostForm("id")
 		fmt.Println("cie:", code)
@@ -244,7 +262,6 @@ func main() {
 			"location": Station.Location,
 		})
 	})
-
 	router.POST("ajax/tripdata", func(c *gin.Context) {
 		origin := c.PostForm("origin")
 		type train struct {
@@ -323,11 +340,113 @@ func main() {
 			"id": id,
 		})
 	})
+	router.POST("/ajax/getprice", func(c *gin.Context) {
+		id := c.PostForm("id")
+		var price int
+		err = db.QueryRow("SELECT price FROM food WHERE id = ?", id).Scan(&price)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"price": price,
+		})
+	})
+	var price float64
+	router.GET("/checkout", func(c *gin.Context) {
+		sessions := sessions.Default(c)
+		fmt.Println("price recieved by server: ", price)
+		domain := "http://127.0.0.1:5000"
+		params := &stripe.CheckoutSessionParams{
+			LineItems: []*stripe.CheckoutSessionLineItemParams{
+				{
+					PriceData: &stripe.CheckoutSessionLineItemPriceDataParams{
+						Currency: stripe.String(string(stripe.CurrencyINR)),
+						ProductData: &stripe.CheckoutSessionLineItemPriceDataProductDataParams{
+							Name: stripe.String("Indian Railways"),
+						},
+						UnitAmountDecimal: stripe.Float64(price * 100),
+					},
+					Quantity: stripe.Int64(1),
+				},
+			},
+			CustomerEmail: stripe.String(sessions.Get("email").(string)),
+			Currency:      stripe.String(string(stripe.CurrencyINR)),
+			Mode:          stripe.String("payment"),
+			SuccessURL:    stripe.String(domain + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
+			CancelURL:     stripe.String(domain + "/checkout/cancelled"),
+		}
+		s, _ := session.New(params)
+		fmt.Println("params", s)
+		c.Redirect(http.StatusFound, s.URL)
+	})
+
+	router.POST("/ajax/bookinfo", func(c *gin.Context) {
+		priceStr := c.PostForm("price")
+		session := sessions.Default(c)
+		session.Set("book-from", c.PostForm("from"))
+		session.Set("book-to", c.PostForm("to"))
+		session.Set("book-train", c.PostForm("train"))
+		session.Set("book-seats", c.PostForm("seats"))
+		session.Set("book-passengers", c.PostForm("passengers"))
+		session.Set("book-start", c.PostForm("start"))
+		session.Set("book-duration", c.PostForm("duration"))
+		session.Set("book-date", c.PostForm("date"))
+		session.Set("book-hotel", c.PostForm("hotel"))
+		session.Set("price", priceStr)
+		session.Set("book-food", c.PostForm("food"))
+		session.Save()
+		fmt.Println(c.PostForm("seats"))
+		fmt.Println(c.PostForm("food"))
+
+		price, err = strconv.ParseFloat(priceStr, 64)
+		if err != nil {
+			fmt.Println("error parsing price:", err.Error())
+			return
+		}
+
+		fmt.Println("price converted by server: ", price)
+	})
+	router.GET("/checkout/success", func(c *gin.Context) {
+		session := sessions.Default(c)
+		sessionID := c.Query("session_id")
+		if sessionID == "" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "no session id",
+			})
+			return
+		}
+		fmt.Println(session.Get("email"))
+		fmt.Println(session.Get("book-from"))
+		fmt.Println(session.Get("book-to"))
+		fmt.Println(session.Get("book-train"))
+		fmt.Println(session.Get("book-seats"))
+		fmt.Println(session.Get("book-passengers"))
+		fmt.Println(session.Get("book-start"))
+		fmt.Println(session.Get("book-duration"))
+		fmt.Println(session.Get("book-date"))
+		fmt.Println(session.Get("book-hotel"))
+		fmt.Println(session.Get("price"))
+		fmt.Println(session.Get("book-food"))
+		_, err = db.Exec("INSERT INTO travel (`user`, `from`, `to`, `train`, `seats`, `passengers`, `start`, `duration`, `date`, `hotel`, `cost`, `food`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", session.Get("email"), session.Get("book-from"), session.Get("book-to"), session.Get("book-train"), session.Get("book-seats"), session.Get("book-passengers"), session.Get("book-start"), session.Get("book-duration"), session.Get("book-date"), session.Get("book-hotel"), session.Get("price"), session.Get("book-food"))
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		c.HTML(http.StatusOK, "success.html", gin.H{
+			"session_id": sessionID,
+		})
+		fmt.Println(sessionID)
+	})
+	router.GET("/checkout/cancelled", func(c *gin.Context) {
+
+		c.HTML(http.StatusOK, "cancelled.html", gin.H{})
+
+	})
 	router.GET("/logout", func(c *gin.Context) {
 		session := sessions.Default(c)
 		session.Clear()
 		session.Save()
 		c.Redirect(http.StatusFound, "/")
 	})
+
 	router.Run(":5000")
 }

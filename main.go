@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -38,20 +39,28 @@ type Station struct {
 }
 
 type Travel struct {
-	ID         int    `json:"id"`
-	User       string `json:"user"`
-	From       string `json:"from"`
-	To         string `json:"to"`
-	Train      int    `json:"train"`
-	Seats      []byte `json:"seats"`
-	Passengers int    `json:"passengers"`
-	Start      string `json:"start"`
-	Duration   string `json:"duration"`
-	Date       []byte `json:"date"`
-	Hotel      bool   `json:"hotel"`
-	Cost       int    `json:"cost"`
-	Food       []byte `json:"food"`
-	Status     string `json:"status"`
+	ID          int      `json:"id"`
+	User        string   `json:"user"`
+	From        string   `json:"from"`
+	To          string   `json:"to"`
+	Train       int      `json:"train"`
+	Seats       []string `json:"seats"`
+	Passengers  int      `json:"passengers"`
+	Start       string   `json:"start"`
+	Duration    string   `json:"duration"`
+	Date        string   `json:"date"`
+	Hotel       bool     `json:"hotel"`
+	Cost        int      `json:"cost"`
+	Food        []string `json:"food"`
+	Status      string   `json:"status"`
+	Hours       int      `json:"hours"`
+	Minutes     int      `json:"minutes"`
+	D1          int      `json:"d1"`
+	D2          int      `json:"d2"`
+	Et1         int      `json:"et1"`
+	Et2         int      `json:"et2"`
+	Timeleft    int      `json:"timeleft"`
+	Timeelapsed int      `json:"timeelapsed"`
 }
 
 func main() {
@@ -69,6 +78,7 @@ func main() {
 	router.LoadHTMLGlob("templates/*")
 
 	router.GET("/", func(c *gin.Context) {
+		date := time.Now().Format("2006-01-02")
 		session := sessions.Default(c)
 		loggedin := false
 		if session.Get("loggedin") == true {
@@ -117,6 +127,98 @@ func main() {
 				fmt.Println("e2:", err.Error())
 			}
 
+			rows, err = db.Query("SELECT id, user, `from`, `to`, train, seats, passengers, start, duration, date, hotel, cost, food, status FROM travel WHERE user = ?", session.Get("email"))
+			if err != nil {
+				fmt.Println("e2:", err.Error())
+			}
+
+			var travels []Travel
+			var hoursList []int
+			var minutesList []int
+			type durhrmin struct {
+				Hours   int `json:"hours"`
+				Minutes int `json:"minutes"`
+			}
+			type hrmin struct {
+				Hours   int `json:"hours"`
+				Minutes int `json:"minutes"`
+			}
+
+			for rows.Next() {
+				var seatsEncoded, foodEncoded string
+				var seats []string
+				var food []string
+				travel := Travel{}
+				err = rows.Scan(&travel.ID, &travel.User, &travel.From, &travel.To, &travel.Train, &seatsEncoded, &travel.Passengers, &travel.Start, &travel.Duration, &travel.Date, &travel.Hotel, &travel.Cost, &foodEncoded, &travel.Status)
+				if err != nil {
+					fmt.Println("e1:", err.Error())
+					continue
+				}
+
+				if err := json.Unmarshal([]byte(seatsEncoded), &seats); err != nil {
+					fmt.Println("e-seats:", err.Error())
+				}
+				travel.Seats = seats
+
+				if err := json.Unmarshal([]byte(foodEncoded), &food); err != nil {
+					fmt.Println("e-food:", err.Error())
+				}
+				travel.Food = food
+
+				t, err := time.Parse("15:04:05", travel.Start)
+				if err != nil {
+					fmt.Println(err.Error())
+					continue
+				}
+				d, err := time.Parse("15:04:05", travel.Duration)
+				if err != nil {
+					fmt.Println(err.Error())
+					continue
+				}
+				hours := t.Hour()
+				minutes := t.Minute()
+				Hrmin := hrmin{Hours: hours, Minutes: minutes}
+				hoursList = append(hoursList, hours)
+				minutesList = append(minutesList, minutes)
+				travel.Hours = hours
+				travel.Minutes = minutes
+				durhr := d.Hour()
+				durmin := d.Minute()
+				Durhrmin := durhrmin{Hours: durhr, Minutes: durmin}
+				travel.D1 = Durhrmin.Hours
+				travel.D2 = Durhrmin.Minutes
+				endTimehr := durhr + hours
+				endTimem := durmin + minutes
+				fmt.Println("iewj", endTimehr, endTimem)
+				travel.Et1 = endTimehr
+				travel.Et2 = endTimem
+				fmt.Printf("Travel ID: %d - Hours: %02d, Minutes: %02d\n", travel.ID, Hrmin.Hours, Hrmin.Minutes)
+				if travel.Date > date {
+					travel.Status = "Upcoming"
+				} else if travel.Date == date {
+					fmt.Println("same date vhai")
+					travelStartTime, err := time.Parse("15:04:05", travel.Start)
+					if err != nil {
+						fmt.Println(err.Error())
+					}
+					if travelStartTime.Hour() > time.Now().Hour() {
+						fmt.Println("ek hogya")
+						travel.Status = "Upcoming"
+					} else if travelStartTime.Hour() <= time.Now().Hour() && travel.Et1 > time.Now().Hour() {
+						travel.Status = "Ongoing"
+					}
+				} else {
+					travel.Status = "Completed"
+				}
+				travel.Timeelapsed = time.Now().Hour() - travel.Hours
+				travel.Timeleft = travel.Et1 - time.Now().Hour()
+				travels = append(travels, travel)
+
+			}
+			fmt.Println(travels)
+
+			fmt.Println("Hours List:", hoursList)
+			fmt.Println("Minutes List:", minutesList)
 			c.HTML(http.StatusOK, "index.html", gin.H{
 				"loggedin":   loggedin,
 				"name":       User.Name,
@@ -137,6 +239,10 @@ func main() {
 				"slocations": stationlocation,
 				"stations":   stations,
 				"food":       fppd,
+				"travels":    travels,
+				"hours":      hoursList,
+				"minutes":    minutesList,
+				"date":       date,
 			})
 		} else {
 			c.HTML(http.StatusOK, "index.html", gin.H{

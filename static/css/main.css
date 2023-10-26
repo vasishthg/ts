@@ -1141,7 +1141,7 @@ td, table{
 
 .ong-time{
     text-align: center;
-    font-size: .8em;
+    font-size: .9em;
     font-family: '400';
     margin-block-end: 0;
     margin-block-start: 0;
@@ -1963,8 +1963,126 @@ transition: all .5s ;
 }
 
 .s-line{
-    width: 95%;
+    width: 93%;
     margin-top: .75em;
     margin-right: 1em;
+    margin-left: 1em;
+}
 
+.event{
+    position: relative;
+    width: 23em; height: 20em; background-color: #191919; border-radius:40px; flex: 1; position: absolute;
+    margin-left: 1em;
+    margin-top: .6em;
+    z-index: 1;
+    color: white;
+}
+
+.suheuje{
+    width: fit-content;
+    display: inline-block;vertical-align: middle;
+    padding-left: 2.5em;
+    font-size: .7em;
+    padding-top: .75em;
+    padding-right: 2.5em;
+    padding-bottom: .75em;
+    font-family: '400';
+    border-radius: 10em;
+    border: 1px whitesmoke solid;
+}
+
+.eowjoe{
+    margin-left: 1.5em;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+
+.eowjoe2{
+    margin-left: 1.5em;
+    margin-top:.65em;
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+}
+
+.event-active{
+    background-color: rgb(238, 238, 238);
+    border: 1px black solid;
+    color: rgb(15, 15, 15);
+}
+
+.ijreo{
+    margin-right: 2em;
+    margin-top: .75em;
+    width: 2em;
+    margin-left: auto;
+}
+
+.ijpwoqr{
+    position: absolute;
+    bottom: 2em;
+    left: 2.5em;
+}
+
+.qiwrjiq{
+    font-family: '500';
+    margin-block-end: 0;
+    color: #737373;
+    font-size: .8em;
+    margin-block-start: .15em;
+}
+
+.qiwrjiq3{
+    font-family: '500';
+    margin-block-end: 0;
+    color: #737373;
+    font-size: .7em;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: .5em;
+    margin-block-start: .15em;
+}
+
+.dfiri{
+    margin-block-start: 0;
+    font-size: 2.3em;
+    margin-block-end: .15em;
+}
+
+.dfiri3{
+    margin-block-end: .15em;
+    font-size: 1.5em;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: .5em;
+    margin-block-start: 0;
+}
+
+
+.ijpwoqr2{
+    position: relative;
+    position: absolute;
+    bottom: 1.5em;
+    left: 2.5em;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 220%;
+}
+
+.qiwrjiq2{
+    font-family: '500';
+    margin-block-end: 0;
+    color: #737373;
+    width: 50%;
+    font-size: .8em;
+    margin-block-start: .15em;
+}
+
+.dfiri2{
+    margin-block-start: 0;
+    font-size: 1.5em;
+    width: 50%;text-align: right;
+    margin-block-end: .15em;
 }

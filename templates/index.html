@@ -12,10 +12,10 @@
     <link rel="icon" href="/static/images/logo.svg">
 </head>
 <body>
-    <div class="loader">
+    <!-- <div class="loader">
             <img src="/static/images/logo.svg" class="loader-img" alt="">
             <div id="loader-spin"></div>
-    </div>
+    </div> -->
   {{if eq .loggedin false}}
     <div class="nmlogin">
         <div>
@@ -286,113 +286,154 @@
             <div class="ds2-2">
                 <div class="schedule">
                     <div class="events">
-                        <div style="width: 10em; height: 2em; background-color: black; border-radius: 1em; flex: 1; position: absolute;"></div>
+                        {{$date := .date}}
+                        {{range .travels}}
+                        {{if eq .Date $date}}
+                        {{if gt .D1 4}}
+                        <div style='top: calc((((59px * {{.Hours}}) + (({{.Minutes}} * 59px) / 60)))); height: calc((59px * {{.D1}}) + ( 59px * ({{.D2}}/ 60)))' class='{{if eq .Status "Ongoing"}}event-active {{else}}{{end}}event'>
+                            <div>
+                                <div  class="eowjoe"><p class="suheuje">{{.Hours}}:{{.Minutes}} - <span id="iejrijoe">{{.Et1}}:{{.Et2}}</span></p><img src="/static/images/icons/more.svg" class="ijreo" alt=""></div>
+                            </div>
+                            <div class="ijpwoqr">
+                                <p class="qiwrjiq">from</p>
+                                <p class="dfiri">{{.From}}</p>
+                                <p class="qiwrjiq">to</p>
+                                <p class="dfiri">{{.To}}</p>
+                            </div>
+                        </div>
+                        {{else if  gt .D1 2}}
+                        <div style='top: calc((((59px * {{.Hours}}) + (({{.Minutes}} * 59px) / 60)))); height: calc((59px * {{.D1}}) + ( 59px * ({{.D2}}/ 60)))' class='{{if eq .Status "Ongoing"}}event-active {{else}}{{end}}event'>
+                            <div>
+                                <div  class="eowjoe"><p class="suheuje">{{.Hours}}:{{.Minutes}} - <span id="iejrijoe">{{.Et1}}:{{.Et2}}</span></p><img src="/static/images/icons/more.svg" class="ijreo" alt=""></div>
+                            </div>
+                            <div class="ijpwoqr2">
+                                <div>
+                                    <p class="qiwrjiq2">from</p>
+                                    <p class="dfiri2">{{.From}}</p>
+                                </div>
+                                <div>
+                                    <p class="qiwrjiq2">to</p>
+                                    <p class="dfiri2">{{.To}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div style='top: calc((((59px * {{.Hours}}) + (({{.Minutes}} * 59px) / 60)))); height: calc((59px * {{.D1}}) + ( 59px * ({{.D2}}/ 60)))' class='{{if eq .Status "Ongoing"}}event-active {{else}}{{end}}event'>
+                            <div>
+                                <div  class="eowjoe2">
+                                    <p class="suheuje">{{.Hours}}:{{.Minutes}} - <span id="iejrijoe">{{.Et1}}:{{.Et2}}</span></p>
+                                    <div>
+                                        <p class="dfiri3">{{.From}}</p>
+                                        <p class="qiwrjiq3">to</p>
+                                        <p class="dfiri3">{{.To}}</p>
+                                    </div>
+                                    <img src="/static/images/icons/more.svg" class="ijreo" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        {{end}}
+                        {{else}}
+                        {{end}}
+                        {{end}}
                     </div>
                     <div class="schedule-hours">
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">00:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">01:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">02:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">03:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">04:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">05:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">06:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">07:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">08:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">09:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">10:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">11:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">12:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">13:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">14:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">15:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">16:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">17:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">18:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">19:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">21:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">22:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">23:00</p>
                         </div>
                         <div class="schedule-hour">
                             <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
+                            <p class="sh-t">24:00</p>
                         </div>
-                        <div class="schedule-hour">
-                            <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
-                        </div>
-                        <div class="schedule-hour">
-                            <img src="/static/images/icons/line.svg" class="s-line" alt="">
-                            <p class="sh-t">0:00</p>
-                        </div>
+                      <br><br><br><br>
                     </div>
                 </div>
             </div>
@@ -405,33 +446,26 @@
                 <div class="thistory">
                     <table class="thistory" style="width: 97%;">
                         <tr style="height: 3em; border-bottom: 1px black solid;">
-                            <th style="text-align:center; width: 10%;">Date</th>
+                            <th style="text-align:center; width: 15%;">Date</th>
                             <th style="padding-left: 5%; width: 50%;"> </th>
                             <th style="width: 10%;"><img src="/static/images/icons/paisa.svg"  id="paisaaa"></th>
                             <th style="width: 10%;"> </th>
                         </tr>
+                        {{range .travels}}
                         <tr style="height: 6.5em;">
-                            <td style="text-align: center; font-family: '400'; font-size: .95em;">12 dec</td>
-                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">Delhi to Kashmir (POK)</td>
-                            <td>1200</td>
+                            <td style="text-align: center; font-family: '400'; font-size: .95em;">{{.Date}}</td>
+                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">{{.From}} to {{.To}}</td>
+                            <td>{{.Cost}}</td>
                             <td><img src="/static/images/icons/more.svg" class="moreee" alt=""></td>
                         </tr>
-                        <tr style="height: 6.5em;">
-                            <td style="text-align: center; font-family: '400'; font-size: .95em;">12 dec</td>
-                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">Delhi to Kashmir (POK)</td>
-                            <td>1200</td>
-                            <td><img src="/static/images/icons/more.svg" class="moreee" alt=""></td>
-                        </tr>
-                        <tr style="height: 6.5em;">
-                            <td style="text-align: center; font-family: '400'; font-size: .95em;">12 dec</td>
-                            <td style="font-family: '500'; font-size: 1.1em; padding-left:5%; text-align: left;">Delhi to Kashmir (POK)</td>
-                            <td>1200</td>
-                            <td><img src="/static/images/icons/more.svg" class="moreee" alt=""></td>
-                        </tr>
+                        {{end}}
+                    
                         
                     </table>
                 </div>
             </div>
+            {{range .travels}}
+            {{if eq .Status "Ongoing"}}
             <div class="dashboard-ongoing">
                 <div class="ongoing-status">
                     <p id="ong-status">Delayed</p>
@@ -439,18 +473,18 @@
                 <div id="ststum">
                     <div class="ongoing-timing">
                         <p class="ong-date">TODAY</p>
-                        <p class="ong-time str-time">9:00AM</p>
+                        <p class="ong-time str-time">{{.D1}}:{{.D2}}</p>
                         <img class="ong-img" src="/static/images/icons/ongoing-arow.svg" alt="">
-                        <p class="ong-time str-time">11:00PM</p>
+                        <p class="ong-time str-time">{{.Et1}}:{{.Et2}}</p>
                     </div>
                     <div class="ongoing-tf">
-                        <p class="ongtf-f">Delhi</p>
-                        <p class="ongtf-t"><span class="ongtf-span">to</span> Kashmir (POK)</p>
+                        <p class="ongtf-f">{{.From}}</p>
+                        <p class="ongtf-t"><span class="ongtf-span">to</span> {{.To}}</p>
                     </div>
                 </div>
                 <div class="ongoing-progress">
-                    <div class="progress-done"></div>
-                    <div class="progress-left"></div>
+                    <div class="progress-done" style="width: calc(({{.Timeelapsed}} / ({{.D1}} * 100)) * 5000%)"></div>
+                    <div class="progress-left" style="width: calc(({{.Timeleft}} / ({{.D1}} * 100)) * 5000%)"></div>
                 </div>
                 <div class="ongoing-atime">
                     <div class="ogat-1">
@@ -458,10 +492,12 @@
                         <p id="ai">Arrival in</p>
                     </div>
                     <div class="ogat-2">
-                        <p id="ait">12 hours</p>
+                        <p id="ait">{{.Timeleft}} hours</p>
                     </div>
                 </div>
             </div>
+            {{end}}
+        {{end}}
         </div>
     </div>
     <div class="bookings-container">
@@ -907,7 +943,6 @@
         </div>
     </div>
 </div>
-
 {{else}}
 error
 {{end}}
@@ -919,6 +954,12 @@ error
     </div> -->
 </body>
 </html>
+{{range .travels}}
+<p style="display: none;" class="d1" id="d{{.ID}}-d1">{{.D1}}</p>
+<p style="display: none;" class="d2" id="d{{.ID}}-d2">{{.D2}}</p>
+<p style="display: none;" class="d3" id="d{{.ID}}-d3">{{.Hours}}</p>
+<p style="display: none;" class="d4" id="d{{.ID}}-d4">{{.Minutes}}</p>
+{{end}}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 <script src="https://js.stripe.com/v3/"></script>

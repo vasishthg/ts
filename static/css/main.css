@@ -772,7 +772,7 @@ vertical-align: middle;
 }
 
 .music-container{
-    /* display: none; */
+    display: none;
 }
 
 .music{
@@ -1278,6 +1278,20 @@ td, table{
     right: 0;
     background: linear-gradient(180deg, rgba(165, 183, 204, 0.52) 0%, rgba(165, 171, 204, 0.00) 100%);
 
+}
+
+.music-gradient{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(165, 204, 192, 0.52) 0%, rgba(165, 171, 204, 0.00) 100%);
 }
 .booking-gradient{
     position: fixed;

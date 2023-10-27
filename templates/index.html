@@ -464,7 +464,7 @@
                     </table>
                 </div>
             </div>
-            {{with index .travels 0}}
+            {{range .travels }}
             {{if eq .Status "Ongoing"}}
             <div class="dashboard-ongoing">
                 <div class="ongoing-status">
@@ -498,7 +498,7 @@
             </div>
             {{else}}
             <p style="margin-top: 7em;
-            margin-bottom: auto; text-align: center;">No ongoing events</p>
+            margin-bottom: auto; text-align: center; position: absolute;">No ongoing events</p>
             {{end}}
         {{end}}
         </div>

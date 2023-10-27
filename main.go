@@ -84,7 +84,7 @@ func main() {
 		if session.Get("loggedin") == true {
 			loggedin = true
 			User := User{}
-			err = db.QueryRow("SELECT * FROM users ").Scan(&User.ID, &User.Name, &User.Email, &User.Phone, &User.DOB, &User.Password, &User.History, &User.Aadhar, &User.Location, &User.Balance, &User.Points, &User.Ongoing, &User.Events, &User.Reccomended)
+			err = db.QueryRow("SELECT * FROM users WHERE email = ?", session.Get("email")).Scan(&User.ID, &User.Name, &User.Email, &User.Phone, &User.DOB, &User.Password, &User.History, &User.Aadhar, &User.Location, &User.Balance, &User.Points, &User.Ongoing, &User.Events, &User.Reccomended)
 			l1 := []rune(User.Name)
 			l2 := string(l1[0:1])
 			rows, err := db.Query("SELECT code, sname, location FROM stations")
@@ -325,6 +325,20 @@ func main() {
 		}
 
 	})
+
+	router.POST("/ajax/addlocation", func(c *gin.Context) {
+		location := c.PostForm("location")
+		session := sessions.Default(c)
+		email := session.Get("email")
+		_, err = db.Exec("UPDATE users SET location = ? WHERE email = ?", location, email)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"status": "success",
+		})
+	})
+
 	router.POST("/ajax/login", func(c *gin.Context) {
 		email := c.PostForm("email")
 		password := c.PostForm("password")
@@ -537,6 +551,18 @@ func main() {
 		if err != nil {
 			fmt.Println(err.Error())
 		}
+		var points int
+		err = db.QueryRow("SELECT points FROM users WHERE email = ?", session.Get("email")).Scan(&points)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		points += 100
+		fmt.Println("points:", points)
+		_, err = db.Exec("UPDATE users SET points = ? WHERE email = ?", points, session.Get("email"))
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+
 		c.HTML(http.StatusOK, "success.html", gin.H{
 			"session_id": sessionID,
 		})

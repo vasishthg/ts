@@ -2381,3 +2381,14 @@ transition: all .5s ;
 .jemwe{
     max-width: 6em;
 }
+
+.plocationadd{
+    border: none;
+    outline: none;
+    font-family: '400';
+    font-size: .8em;
+    background-color: none;
+    background: none;
+    display: inline-block;
+    vertical-align: middle;
+}

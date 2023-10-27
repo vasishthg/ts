@@ -230,6 +230,10 @@ $("#login-form").submit(function(){
         }
     });
 })
+
+var currentdate = new Date();
+var time = currentdate.getHours() + ":" + currentdate.getMinutes();
+$(".section2-time-p").text(time)
 var allnavlinks = document.getElementsByClassName("navlink-active")
 $(".goto-home").click(function() {
 	$(allnavlinks).removeClass("navlink-active")
@@ -381,6 +385,35 @@ $(".goto-checkin").click(function() {
 
 		}, 200)
 	}, 600)
+})
+
+$("#wejqwemmm").click(function() {
+    systum = document.querySelector(".plocationadd").value
+    if (systum === ""){
+        alert("Please enter a valid location")
+        return
+    }
+    $.ajax({
+        url: "/ajax/addlocation",
+        type: "POST",
+
+        data: {
+            location: systum
+        },
+        success: function(response) {
+            console.log(response)
+            if (response['status'] === "success"){
+                alert("Location added successfully")
+                window.location.reload()
+            }
+        },
+        error: function(error) {
+            console.log(error);
+            if(error['status'] === 409){
+                alert("Invalid credentials")
+            }
+        }
+    });
 })
 
 $(".goto-music").click(function(){

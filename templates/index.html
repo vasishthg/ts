@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTEC syndicate</title>
+    <title>Indian Railways</title>
     <link rel="stylesheet" href="/static/css/main.css">
     <link
     rel="stylesheet"
@@ -12,10 +12,10 @@
     <link rel="icon" href="/static/images/logo.svg">
 </head>
 <body>
-    <!-- <div class="loader">
+    <div class="loader">
             <img src="/static/images/logo.svg" class="loader-img" alt="">
             <div id="loader-spin"></div>
-    </div> -->
+    </div>
   {{if eq .loggedin false}}
     <div class="nmlogin">
         <div>
@@ -158,7 +158,7 @@
                 <div class="section2-time">
                     <p class="section2-time-p">12:00</p>
                     <div id="s2d">
-                        <p class="section2-time-d">HCET Syndicate <br> Dashboard</p>
+                        <p class="section2-time-d">Indian Railways <br> Dashboard</p>
                     </div>
                 </div >
                 <div class="section2-profile-btn">
@@ -181,9 +181,11 @@
                     <div class="dashboard-profile-name">
                         <p class="dashboard-profile-nayme">{{.name}}</p>
                         {{if .location}}
-                        <p class="dashboard-profile-location">Sri nagar, kashmir</p>
+                        <p class="dashboard-profile-location">{{.location}}</p>
                         {{else}}
-                        <p class="dashboard-profile-location">add location</p>
+                        <input class="dashboard-profile-location plocationadd" placeholder="Add location" type="text">
+                        <img src="/static/images/icons/tick.svg" style="max-width: 1em; display: inline-block;
+                        vertical-align: middle;filter: grayscale(100%) invert(100%);" id="wejqwemmm" alt="">
                         {{end}}
                     </div>
                     <div class="dashboard-profile-stats">
@@ -201,7 +203,7 @@
                                 <img src="/static/images/icons/travel.svg" class="dp-stat-img" alt="">
                                 <div class="dp-stat-details">
                                     <p class="dp-stat-details-title">travel points</p>
-                                    <p class="dpst-details">120</p>
+                                    <p class="dpst-details">{{.points}}</p>
                                 </div>
                             </div>
                         </div>

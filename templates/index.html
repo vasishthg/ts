@@ -464,7 +464,7 @@
                     </table>
                 </div>
             </div>
-            {{range .travels}}
+            {{with index .travels 0}}
             {{if eq .Status "Ongoing"}}
             <div class="dashboard-ongoing">
                 <div class="ongoing-status">
@@ -496,6 +496,9 @@
                     </div>
                 </div>
             </div>
+            {{else}}
+            <p style="margin-top: 7em;
+            margin-bottom: auto; text-align: center;">No ongoing events</p>
             {{end}}
         {{end}}
         </div>
@@ -878,6 +881,215 @@
         </div>
         </form>
     </div>
+    <div class="checkin-container">
+        <div class="checkin">
+            <div class="checkin-s1">
+                <div class="checkin-s1-main">
+                    <img src="/static/images/pass.svg" class="checkin-mainimg" alt="">
+                    <div class="checkin-s1-details">
+                        <div>
+                            <p class="collectpass-txt">Collect <br>Quickaccess pass</p>
+                            <div class="checking-s1-2">
+                                <img src="/static/images/icons/location.svg" class="checkin-icon-location" alt="">
+                                <p class="checkin-area">(DEC) Delhi Cantt</p>
+                            </div>
+                            <br>
+                            <div class="download-btn">
+                                <p>Download</p>
+                            </div>
+                        </div>
+                        <div class="iswqjeijiwej">
+                            <p id="yshe">MyCabin</p>
+                            <p id="jiewj">17</p>
+                            <div id="okwe">
+                                <p id="weik">IN USE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="checkin-s2"></div>
+            <div class="checkin-s3">
+                <div class="checkin-s3-main">
+                    <div class="eijieijeim">
+                        <p class="bookings-title" style="margin-left: 1em;font-family: '300';">Locker Status</p>
+                        <div class="ongoing-status">
+                            <p id="ong-status">Delayed</p>
+                        </div>
+                        <div class="s3-1-container">
+                            <div class="huwehieji t2">
+                                <p id="irwejirjkemr">QUICKACCESS PASS</p>
+                                <p id="irwejirjkemre">420</p>
+                            </div>
+                            <div class="huwehieji t1">
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eijieijeim">
+                        <p class="bookings-title" style="margin-left: 1em;font-family: '300';">Request Assistance</p>
+                        <div class="ongoing-status">
+                            <p id="ong-status">Delayed</p>
+                        </div>
+                        <div class="ojoewmekwmek">
+                            <div class="kwqemkqwme">
+                                <div class="owekjwlewqe">
+                                    <img src="/static/images/icons/sweep.svg" class="iekemmwe" alt="">
+                                </div>
+                                <div class="owekjwlewqe">
+                                    <img src="/static/images/icons/retardhaisamarth.svg" class="iekemmwe" alt="">
+                                </div>
+                            </div>
+                            <div class="uiuuuiuhiu">
+                                <div class="owekjwlewqe">
+                                    <img src="/static/images/icons/emer.svg" class="iekemmwe" alt="">
+                                </div>
+                                <div class="owekjwlewqe">
+                                    <img src="/static/images/icons/nais.svg" class="iekemmwe" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="music-container">
+        <div class="music">
+            <div class="music-s1">
+                <div class="ms1-main">
+                    <div class="ms1-musics">
+                        <div class="ms1-music">
+                            <img src="/static/images/songs/1.png" class="syswjnrm" alt="">
+                        </div>
+                        <div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/1.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/1.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/1.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/3.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/1.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/2.png" class="syswjnrm" alt="">
+                        </div><div class="ms1-music">
+                            <img src="/static/images/songs/1.png" class="syswjnrm" alt="">
+                        </div>
+                        
+                    </div>
+                    <p class="ms1-title">Discover</p>
+                </div>
+            </div>
+            <div class="music-s2">
+                <div class="ms2-main">
+                    <div class="ms2-1">
+                        <p class="bookings-title">Vote Cabin Leader</p>
+
+                        <div class="systujmw2">
+
+                            <div class="bookin-train">
+                                <div class="train-1 train">
+                                    <svg width="89" height="271" viewBox="0 0 89 271" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect class="train-color train1-color" x="13" width="63" height="177" rx="31.5" fill="black"/>
+                                        <rect id="sysgh" x="19" y="6" width="50" height="165" rx="25" fill="#2C2C2C"/>
+                                        <rect class="train-color train1-color" y="21" width="89" height="250" rx="35" fill="black"/>
+                                        <rect class="train1-seccolor" x="76" y="39" width="215" height="15" rx="7.5" transform="rotate(90 76 39)" fill="#2C2C2C"/>
+                                        <rect class="train1-seccolor" x="30" y="39" width="215" height="15" rx="7.5" transform="rotate(90 30 39)" fill="#2C2C2C"/>
+                                        <path id="train-text" d="M50.9053 137.755L50.9053 139.328L40 139.328L40 137.209L48.4438 137.209L47.1507 135.293L48.6307 134.389L50.9053 137.755ZM40 149.396L42.1655 148.664L42.1655 144.177L40 143.445L40 141.202L50.9053 145.128L50.9053 147.714L40 151.64L40 149.396ZM44.0505 144.816L44.0505 148.025L48.7709 146.421L44.0505 144.816Z" fill="white"/>
+                                    </svg>                   </div>
+                                <div class="train-intersection">
+                                    <svg width="8" height="23" viewBox="0 0 8 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="8" height="23" fill="black"/>
+                                    </svg>                        
+                                </div>
+                                <div class="train-2 train">
+                                    <svg width="89" height="250" viewBox="0 0 89 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect class="train-color train2-color" width="89" height="250" rx="35" fill="#969697"/>
+                                        <rect class="train2-seccolor" x="76" y="17" width="215" height="15" rx="7.5" transform="rotate(90 76 17)" fill="#A7A7A9"/>
+                                        <rect class="train2-seccolor" x="30" y="17" width="215" height="15" rx="7.5" transform="rotate(90 30 17)" fill="#A7A7A9"/>
+                                        <path id="train-text" d="M50.9053 120.755L50.9053 122.328L40 122.328L40 120.209L48.4438 120.209L47.1507 118.293L48.6307 117.389L50.9053 120.755ZM45.7331 131.321C45.2501 132.381 44.3621 132.957 43.1469 132.957C41.2152 132.957 40 131.602 40 129.078L40 124.981L50.9053 124.981L50.9053 128.673C50.9053 131.165 49.7213 132.521 47.9764 132.521C46.9638 132.521 46.2316 132.1 45.7642 131.321L45.7331 131.321ZM49.0825 128.673L49.0825 127.099L46.3718 127.099L46.3718 128.673C46.3718 129.654 46.7457 130.402 47.7583 130.402C48.7554 130.402 49.0825 129.592 49.0825 128.673ZM41.8227 129.078C41.8227 130.09 42.3213 130.807 43.2872 130.807C44.2998 130.807 44.6893 130.028 44.6893 129.078L44.6893 127.099L41.8227 127.099L41.8227 129.078Z" fill="white"/>
+                
+                                    </svg>
+                </div>
+                                <div class="train-intersection">
+                                    <svg width="8" height="23" viewBox="0 0 8 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="8" height="23" fill="black"/>
+                                    </svg>
+                                </div>
+                                <div class="train-3 train">
+                                    <svg width="89" height="250" viewBox="0 0 89 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect class="train-color train3-color" width="89" height="250" rx="35" fill="#969697"/>
+                                        <rect class="train3-seccolor" x="76" y="17" width="215" height="15" rx="7.5" transform="rotate(90 76 17)" fill="#A7A7A9"/>
+                                        <rect class="train3-seccolor" x="30" y="17" width="215" height="15" rx="7.5" transform="rotate(90 30 17)" fill="#A7A7A9"/>
+                                        <path id="train-text" d="M50.9053 117.755L50.9053 119.328L40 119.328L40 117.209L48.4438 117.209L47.1507 115.293L48.6307 114.389L50.9053 117.755ZM41.8072 127.137C41.8072 128.274 42.2745 129.147 42.9756 129.723L41.8227 131.468C40.5764 130.487 39.7975 128.96 39.7975 127.137C39.7975 123.912 42.2589 121.591 45.4526 121.591C48.6463 121.591 51.0922 123.912 51.0922 127.137C51.0922 128.96 50.3288 130.487 49.0669 131.468L47.9141 129.723C48.6152 129.147 49.0825 128.274 49.0825 127.137C49.0825 124.878 47.2598 123.71 45.4526 123.71C43.6299 123.71 41.8072 124.878 41.8072 127.137Z" fill="white"/>
+                                    </svg>
+                                          
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wqiejqwkemqmk">
+                            <div class="aslahaibhaika">
+                                <img src="/static/images/lvis.svg" class="jemwe" alt="">
+                                <p class="qwemqwe">Elvis</p>
+                            </div>
+                            <div class="aslahaibhaika">
+                                <img src="/static/images/seldon.svg" class="jemwe" alt="">
+                                <p class="qwemqwe">Sheldon</p>
+                            </div>
+                            <div class="aslahaibhaika">
+                                <img src="/static/images/chillar.svg" class="jemwe" alt="">
+                                <p class="qwemqwe">Penny</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="ms2-2">
+                        <div style="position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);">
+                        <img src="/static/images/lvis.svg" style="display: inline-block; max-width: 5em;
+                        vertical-align: middle;" alt="">
+                        <div style="display: inline-block;
+                        vertical-align: middle; font-family: '500';margin-left: 2em;"><p>Active leader</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
 <div class="booking-stations">
     <p class="suqwrj">x</p>

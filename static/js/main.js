@@ -231,57 +231,156 @@ $("#login-form").submit(function(){
     });
 })
 var allnavlinks = document.getElementsByClassName("navlink-active")
-$(".goto-home").click(function(){
-    $(allnavlinks).removeClass("navlink-active")
-    $(this).addClass("navlink-active")
-    $(".dashboard-gradient").fadeIn()
-            $(".bookings-step2-container").fadeOut()
-            $("#uheh").fadeOut()
-    $(".booking-gradient").fadeOut()
-    $(".bookin-train").hide("slide", {direction: "down"}, 500)
-    setTimeout(function(){
-        $(".bookings-tickets").hide("slide", {direction: "left"}, 600)
-        $(".booking-userarea").hide("slide", {direction: "right"}, 600)
-        $(".dashboard-main").fadeIn(100)
-    }, 550)
-setTimeout(function(){
-    $(".dashboard-section1").show("slide", {direction: "left"}, 600)
-    setTimeout(function(){
-        $(".dashboard-section3").show("slide", {direction: "right"}, 600)
-    }, 300)
-    $(".dashboard-section2").show("slide", {direction: "up"}, 300)
-}, 1100)
-})
-$(".goto-book").click(function(){
-    $(allnavlinks).removeClass("navlink-active")
-    $(this).addClass("navlink-active")
-    $(".dashboard-gradient").fadeOut()
-            $(".bookings-step2-container").fadeOut()
-            $("#uheh").fadeOut(200)
-    $(".booking-gradient").fadeIn()
-    $(".dashboard-section1").hide("slide", {direction: "left"}, 600)
-    $(".dashboard-section3").hide("slide", {direction: "right"}, 600)
-    $(".dashboard-section2").hide("slide", {direction: "up"}, 600)
-    setTimeout(function(){
-    $(".dashboard-main").fadeOut(100)
-        setTimeout(function(){
-            $(".bookin-train").hide()
-            $(".bookings-tickets").hide()
-            $(".booking-userarea").hide()
-            $(".bookings-container").show()
-            
-            setTimeout(function(){
-                $(".bookings-tickets").show("slide", {direction: "left"}, 600)
-                $(".booking-userarea").show("slide", {direction: "right"}, 600)
-                setTimeout(function(){
-                    $(".bookin-train").show("slide", {direction: "down"}, 1500)
-                }, 500)
-            }, 100)
-        }, 200)
-    },600)
+$(".goto-home").click(function() {
+	$(allnavlinks).removeClass("navlink-active")
+	$(this).addClass("navlink-active")
+	$(".dashboard-gradient").fadeIn()
+	$(".bookings-step2-container").fadeOut()
+	$("#uheh").fadeOut()
+	$(".booking-gradient").fadeOut()
+	$(".bookin-train").hide("slide", {
+		direction: "down"
+	}, 500)
+	$(".checkin-s1").hide("slide", {
+		direction: "left"
+	}, 600)
+	$(".checkin-s3").hide("slide", {
+		direction: "right"
+	}, 600)
+	$(".checkin-s2").hide("slide", {
+		direction: "up"
+	}, 600)
+	setTimeout(function() {
+		$(".bookings-tickets").hide("slide", {
+			direction: "left"
+		}, 600)
+		$(".booking-userarea").hide("slide", {
+			direction: "right"
+		}, 600)
+		$(".dashboard-main").fadeIn(100)
+		$(".checkin-container").fadeOut(100)
+
+	}, 550)
+	setTimeout(function() {
+		$(".dashboard-section1").show("slide", {
+			direction: "left"
+		}, 600)
+		setTimeout(function() {
+			$(".dashboard-section3").show("slide", {
+				direction: "right"
+			}, 600)
+		}, 300)
+		$(".dashboard-section2").show("slide", {
+			direction: "up"
+		}, 300)
+	}, 1100)
 })
 
-// $(".dashboard-main").fadeOut(100)
+$(".goto-book").click(function() {
+	$(allnavlinks).removeClass("navlink-active")
+	$(this).addClass("navlink-active")
+	$(".dashboard-gradient").fadeOut()
+	$(".bookings-step2-container").fadeOut()
+	$("#uheh").fadeOut(200)
+	$(".booking-gradient").fadeIn()
+	$(".dashboard-section1").hide("slide", {
+		direction: "left"
+	}, 600)
+	$(".dashboard-section3").hide("slide", {
+		direction: "right"
+	}, 600)
+	$(".dashboard-section2").hide("slide", {
+		direction: "up"
+	}, 600)
+	$(".checkin-s1").hide("slide", {
+		direction: "left"
+	}, 600)
+	$(".checkin-s3").hide("slide", {
+		direction: "right"
+	}, 600)
+	$(".checkin-s2").hide("slide", {
+		direction: "up"
+	}, 600)
+	setTimeout(function() {
+		$(".dashboard-main").fadeOut(100)
+		$(".checkin-container").fadeOut(100)
+		setTimeout(function() {
+			$(".bookin-train").hide()
+			$(".bookings-tickets").hide()
+			$(".booking-userarea").hide()
+			$(".bookings-container").show()
+
+			setTimeout(function() {
+				$(".bookings-tickets").show("slide", {
+					direction: "left"
+				}, 600)
+                setTimeout(function(){
+                    $(".booking-userarea").show("slide", {
+                        direction: "right"
+                    }, 600)
+                }, 500)
+				setTimeout(function() {
+					$(".bookin-train").show("slide", {
+						direction: "down"
+					}, 1500)
+				}, 500)
+			}, 100)
+		}, 200)
+	}, 600)
+})
+
+$(".goto-checkin").click(function() {
+	$(allnavlinks).removeClass("navlink-active")
+	$(this).addClass("navlink-active")
+	$(".dashboard-gradient").fadeIn()
+	$(".bookings-step2-container").fadeOut()
+	$("#uheh").fadeOut(200)
+	$(".booking-gradient").fadeOut()
+	$(".dashboard-section1").hide("slide", {
+		direction: "left"
+	}, 600)
+	$(".dashboard-section3").hide("slide", {
+		direction: "right"
+	}, 600)
+	$(".dashboard-section2").hide("slide", {
+		direction: "up"
+	}, 600)
+	setTimeout(function() {
+		$(".dashboard-main").fadeOut(100)
+		setTimeout(function() {
+			$(".bookin-train").hide("slide", {
+				direction: "down"
+			}, 500)
+			setTimeout(function() {
+				$(".bookings-tickets").hide("slide", {
+					direction: "left"
+				}, 600)
+				$(".booking-userarea").hide("slide", {
+					direction: "right"
+				}, 600)
+				$(".dashboard-main").fadeOut(100)
+			}, 550)
+			$(".checkin-container").show()
+
+			setTimeout(function() {
+				$(".checkin-s1").show("slide", {
+					direction: "left"
+				}, 600)
+				setTimeout(function() {
+					$(".checkin-s3").show("slide", {
+						direction: "right"
+					}, 600)
+				}, 300)
+				$(".checkin-s2").show("slide", {
+					direction: "up"
+				}, 300)
+			}, 1100)
+
+		}, 200)
+	}, 600)
+})
+
+$(".dashboard-main").fadeOut(100)
 
 $("#booking-from").click(function(){
     $('.booking-stations').fadeIn()

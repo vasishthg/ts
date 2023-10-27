@@ -1367,6 +1367,16 @@ right: 2em;
 top: 0;
 }
 
+
+.bt2{
+    width: 10em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+top: 0;
+}
 .systujmw{
     scale: .7;
     position: absolute;

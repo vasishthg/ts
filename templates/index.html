@@ -1166,6 +1166,7 @@ error
             <p class="server-messagee">systum is riyal</p>
         </div>
     </div> -->
+    
 </body>
 </html>
 {{range .travels}}
@@ -1174,6 +1175,21 @@ error
 <p style="display: none;" class="d3" id="d{{.ID}}-d3">{{.Hours}}</p>
 <p style="display: none;" class="d4" id="d{{.ID}}-d4">{{.Minutes}}</p>
 {{end}}
+<div class="cursor">
+        
+    <div class="cursor__ball cursor__ball--big ">
+        <svg height="30" width="30">
+          <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+        </svg>
+      </div>
+    <div class="cursor__ball cursor__ball--small">
+      <svg height="10" width="10">
+        <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+      </svg>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js" integrity="sha512-Mf/xUqfWvDIr+1B6zfnIDIiG7XHzyP/guXUWgV6PgaQoIFeXkJQR5XWh9fqAiCiRCpemabt3naV4jhDWVnuYDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 <script src="https://js.stripe.com/v3/"></script>
@@ -1252,3 +1268,67 @@ error
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
    -->
+
+   
+   <style>
+    .cursor {
+    pointer-events: none;
+    display: none;
+  }
+  .cursor__ball {
+    position: fixed;
+    top: 0;
+    left: 0;
+    mix-blend-mode:difference;
+    z-index: 10095434953049823900;
+  }
+  .cursor__ball circle {
+    fill: #f7f8fa;
+  }
+
+  
+*{
+    cursor: none !important;
+    overflow-anchor: none;
+}
+
+   </style>
+
+   <script>
+    
+const $bigBall = document.querySelector('.cursor__ball--big');
+const $smallBall = document.querySelector('.cursor__ball--small');
+const $hoverables = document.querySelectorAll('.hoverable');
+
+document.body.addEventListener('mousemove', onMouseMove);
+for (let i = 0; i < $hoverables.length; i++) {
+  $hoverables[i].addEventListener('mouseenter', onMouseHover);
+  $hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
+}
+
+function onMouseMove(e) {
+    TweenMax.to($bigBall, .4, {
+      x: e.clientX - 15,
+      y: e.clientY - 15
+
+    })
+    $(".cursor").css("display", "block")
+  TweenMax.to($smallBall, .1, {
+    x: e.clientX - 5,
+    y: e.clientY - 5
+  })
+}
+
+function onMouseHover() {
+  audhover.play()
+  TweenMax.to($bigBall, .3, {
+    scale: 2
+  })
+}
+function onMouseHoverOut() {
+  TweenMax.to($bigBall, .3, {
+    scale: 1
+  })
+}
+
+   </script>
